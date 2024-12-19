@@ -1,0 +1,303 @@
+<div class="page-header">
+  <h1 class="page-title">
+    <nb-icon icon="book-open-outline"></nb-icon>
+    <span *ngIf="currentLanguage === 'en'">User Guide</span>
+    <span *ngIf="currentLanguage === 'vi_VN'">Hướng dẫn sử dụng</span>
+  </h1>
+  <p class="page-subtitle" *ngIf="currentLanguage === 'en'">
+    Learn how to use our trading tools and charts effectively
+  </p>
+  <p class="page-subtitle" *ngIf="currentLanguage === 'vi_VN'">
+    Tìm hiểu cách sử dụng hiệu quả các công cụ và biểu đồ giao dịch của chúng tôi
+  </p>
+</div>
+
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-header>
+        <p class="description" *ngIf="currentLanguage === 'en'">
+            <strong>Forex Heatmap Widget:</strong>
+            Show off a snapshot of currency market action. This widget lets you spot strong and weak currencies and see
+            how they compare to each other, all in real-time.
+        </p>
+        <p class="description" *ngIf="currentLanguage === 'vi_VN'">
+            <strong>Tiện ích bản đồ nhiệt Forex:</strong>
+            Hiển thị ảnh chụp nhanh về hành động của thị trường tiền tệ. Tiện ích này cho phép bạn phát hiện các loại
+            tiền tệ mạnh và yếu và xem chúng so sánh với nhau như thế nào, tất cả đều theo thời gian thực.
+        </p>
+    </nb-card-header>
+    <nb-card-body class="chart-body">
+        <div class="container-fluid d-flex" style="height: 100vh; padding: 0;">
+            <div class="tradingview-widget-container flex-fill">
+
+                <tr-forex-heatmap> </tr-forex-heatmap>
+
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-header>
+       
+        <p class="description" *ngIf="currentLanguage === 'en'">
+            <strong>Stock Heatmap Widget:</strong>
+            This widget shows off a macro view on global stocks. Perfect for segmenting by sector, country or market
+            cap.
+        </p>
+        <p class="description" *ngIf="currentLanguage === 'vi_VN'">
+            <strong>Tiện ích bản đồ nhiệt chứng khoán:</strong>
+            Tiện ích này hiển thị chế độ xem vĩ mô về chứng khoán toàn cầu. Hoàn hảo để phân khúc theo ngành, quốc gia
+            hoặc giới hạn thị trường.
+        </p>
+    </nb-card-header>
+    <nb-card-body class="chart-body">
+        <div class="container-fluid d-flex" style="height: 100vh; padding: 0;">
+            <div class="tradingview-widget-container flex-fill">
+
+                <tr-stock-heatmap> </tr-stock-heatmap>
+
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-header>
+   
+        <p class="description" *ngIf="currentLanguage === 'en'">
+            <strong>Crypto Coins Heatmap Widget:</strong>
+            This widget gives you a birds-eye view of crypto. Segment by type of coin, market cap, recent performance
+            and more.
+        </p>
+        <p class="description" *ngIf="currentLanguage === 'vi_VN'">
+            <strong>Tiện ích bản đồ nhiệt tiền điện tử:</strong>
+            Tiện ích này cung cấp cho bạn cái nhìn toàn cảnh về tiền điện tử. Phân đoạn theo loại tiền, vốn hóa thị
+            trường, hiệu suất gần đây và hơn thế nữa.
+        </p>
+    </nb-card-header>
+    <nb-card-body class="chart-body">
+        <div class="container-fluid d-flex" style="height: 100vh; padding: 0;">
+            <div class="tradingview-widget-container flex-fill">
+
+                <tr-crypto-coins-heatmap> </tr-crypto-coins-heatmap>
+
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-header>
+     
+        <p class="description" *ngIf="currentLanguage === 'en'">
+            <strong>ETF Heatmap Widget:</strong>
+            Our ETF Heatmap widget provides a comprehensive view of exchange-traded funds. Easily filter by AUM,
+            performance, dividend yield, volume, country, and more.
+        </p>
+        <p class="description" *ngIf="currentLanguage === 'vi_VN'">
+            <strong>Tiện ích bản đồ nhiệt ETF:</strong>
+            Tiện ích Bản đồ nhiệt ETF của chúng tôi cung cấp cái nhìn toàn diện về các quỹ giao dịch trao đổi. Dễ dàng
+            lọc theo AUM, hiệu suất, tỷ suất cổ tức, khối lượng, quốc gia, v.v.
+        </p>
+    </nb-card-header>
+    <nb-card-body class="chart-body">
+        <div class="container-fluid d-flex" style="height: 100vh; padding: 0;">
+            <div class="tradingview-widget-container flex-fill">
+
+                <tr-etf-heatmap> </tr-etf-heatmap>
+
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-header>
+
+    </nb-card-header>
+    <nb-card-body class="chart-body">
+        <div class="container-fluid d-flex" style="height: 100vh; padding: 0;">
+            <div class="tradingview-widget-container flex-fill">
+
+                <tr-forex-cross-rates> </tr-forex-cross-rates>
+
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-header>
+     
+        <p class="description" *ngIf="currentLanguage === 'en'">
+            <strong>Screener Widget:</strong>
+            A powerful tool to help you easily filter and sort stocks based on fundamental and technical indicators, so
+            you can find what fits your needs.
+        </p>
+        <p class="description" *ngIf="currentLanguage === 'vi_VN'">
+            <strong>Tiện ích lọc:</strong>
+            Công cụ mạnh mẽ giúp bạn dễ dàng lọc và phân loại cổ phiếu dựa trên các chỉ báo cơ bản và kỹ thuật, để tìm
+            ra những gì phù hợp với nhu cầu của bạn.
+        </p>
+    </nb-card-header>
+    <nb-card-body class="chart-body">
+        <div class="container-fluid d-flex" style="height: 100vh; padding: 0;">
+            <div class="tradingview-widget-container flex-fill">
+
+                <tr-screener> </tr-screener>
+
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-header>
+      
+        <p class="description" *ngIf="currentLanguage === 'en'">
+            <strong>Cryptocurrency Market Widget:</strong>
+            Explore cryptocurrency assets and view them ranked by market capitalization, helping you easily identify the
+            most valuable coins.
+        </p>
+        <p class="description" *ngIf="currentLanguage === 'vi_VN'">
+            <strong>Tiện ích Thị trường Tiền ảo:</strong>
+            Khám phá các tài sản tiền ảo và xem thứ hạng của chúng dựa trên vốn hóa thị trường, giúp bạn dễ dàng nhận
+            diện những đồng tiền có giá trị nhất.
+        </p>
+    </nb-card-header>
+    <nb-card-body class="chart-body">
+        <div class="container-fluid d-flex" style="height: 100vh; padding: 0;">
+            <div class="tradingview-widget-container flex-fill">
+
+                <tr-cryptocurrency-market> </tr-cryptocurrency-market>
+
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-header>
+       
+        <p class="description" *ngIf="currentLanguage === 'en'">
+            <strong>Fundamental Data Widget:</strong>
+            Get a detailed view of a company's performance beyond its stock price, helping you make informed investment
+            decisions.
+        </p>
+        <p class="description" *ngIf="currentLanguage === 'vi_VN'">
+            <strong>Tiện ích Dữ liệu Cơ bản:</strong>
+            Xem chi tiết về hiệu quả hoạt động của một công ty ngoài giá cổ phiếu, giúp bạn đưa ra các quyết định đầu tư
+            sáng suốt.
+        </p>
+    </nb-card-header>
+    <nb-card-body class="chart-body">
+        <div class="container-fluid d-flex" style="height: 100vh; padding: 0;">
+            <div class="tradingview-widget-container flex-fill">
+
+                <tr-symbol-financials-data> </tr-symbol-financials-data>
+
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-header>
+      
+        <p class="description" *ngIf="currentLanguage === 'en'">
+            <strong>Symbol Info Widget:</strong>
+            Quickly view key information about a stock, including financial details and quotes, all in one easy-to-read
+            format.
+        </p>
+        <p class="description" *ngIf="currentLanguage === 'vi_VN'">
+            <strong>Tiện ích Thông tin Mã chứng khoán:</strong>
+            Nhanh chóng xem các thông tin quan trọng về một mã chứng khoán, bao gồm dữ liệu tài chính và giá cả, trong
+            một định dạng dễ đọc.
+        </p>
+    </nb-card-header>
+    <nb-card-body class="chart-body">
+        <div class="container-fluid d-flex" style="height: 100vh; padding: 0;">
+            <div class="tradingview-widget-container flex-fill">
+
+                <tr-symbol-info> </tr-symbol-info>
+
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-header>
+      
+        <p class="description" *ngIf="currentLanguage === 'en'">
+            <strong>Technical Analysis Widget:</strong>
+            A dynamic gauge chart that shows buy, sell, or hold recommendations based on technical analysis for
+            different timeframes. Perfect for quick decision-making.
+        </p>
+        <p class="description" *ngIf="currentLanguage === 'vi_VN'">
+            <strong>Tiện ích Phân tích Kỹ thuật:</strong>
+            Biểu đồ dạng đồng hồ đo hiển thị khuyến nghị mua, bán hoặc giữ dựa trên phân tích kỹ thuật theo từng khung
+            thời gian. Rất hữu ích để hỗ trợ ra quyết định nhanh chóng.
+        </p>
+
+    </nb-card-header>
+    <nb-card-body class="chart-body">
+        <div class="container-fluid d-flex" style="height: 100vh; padding: 0;">
+            <div class="tradingview-widget-container flex-fill">
+
+                <tr-symbol-technical-analysis> </tr-symbol-technical-analysis>
+
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-header>
+     
+        <p class="description" *ngIf="currentLanguage === 'en'">
+            <strong>Company Profile:</strong>
+            View a quick summary of a company, including its description, sector, and industry.
+        </p>
+        <p class="description" *ngIf="currentLanguage === 'vi_VN'">
+            <strong>Hồ sơ Công ty:</strong>
+            Xem nhanh thông tin tổng quan về một công ty, bao gồm mô tả, lĩnh vực hoạt động và ngành nghề.
+        </p>
+    </nb-card-header>
+    <nb-card-body class="chart-body">
+        <div class="container-fluid d-flex" style="height: 100vh; padding: 0;">
+            <div class="tradingview-widget-container flex-fill">
+
+                <tr-symbol-profile> </tr-symbol-profile>
+
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card-header>
+      
+        <p class="description" *ngIf="currentLanguage === 'en'">
+            <strong>Top Stories:</strong>
+            Stay updated with the latest news in crypto and stock markets. Quick daily briefs designed to be read in
+            under 20 seconds.
+        </p>
+        <p class="description" *ngIf="currentLanguage === 'vi_VN'">
+            <strong>Tin tức nổi bật:</strong>
+            Cập nhật nhanh các tin tức mới nhất về thị trường tiền mã hóa và chứng khoán. Bản tóm tắt hàng ngày được
+            thiết kế để bạn đọc chưa đến 20 giây.
+        </p>
+
+    </nb-card-header>
+    <nb-card-body class="chart-body">
+        <div class="container-fluid d-flex" style="height: 100vh; padding: 0;">
+            <div class="tradingview-widget-container flex-fill">
+
+                <tr-news> </tr-news>
+
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

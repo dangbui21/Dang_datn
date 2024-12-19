@@ -11,6 +11,7 @@ import { CustomChartComponent } from './custom-charts/custom-chart/custom-chart.
 import { MyPageComponent } from './my-page/my-page.component';
 import { AccComponent } from './acc/acc.component';
 import { AuthGuard } from './acc/guards/auth.guard';
+import { ChartGuideComponent } from './chart-guide/chart-guide.component';
 
 const routes: Routes = [{
   path: '',
@@ -41,6 +42,10 @@ const routes: Routes = [{
       path: 'my-page',
       component: MyPageComponent,  
       canActivate: [AuthGuard]
+    },
+    {
+      path: 'chart-guide',
+      component: ChartGuideComponent,
     },
     {
       path: 'acc',

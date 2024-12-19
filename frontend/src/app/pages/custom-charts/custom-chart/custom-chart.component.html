@@ -70,11 +70,17 @@
             <nb-card class="full-height">
                 <nb-card-header class="drag-handler">
                     <h3 class="nb-text">{{ item.type }}</h3>
-                    <button nbButton ghost size="small" class="lock-button" [class.locked]="item.locked"
-                        (click)="toggleLock(item); $event.stopPropagation()">
-                        <nb-icon *ngIf="item.locked" icon="lock" pack="eva"></nb-icon>
-                        <nb-icon *ngIf="!item.locked" icon="unlock" pack="eva"></nb-icon>
-                    </button>
+                    <div class="chart-actions">
+                        <button nbButton ghost size="small" class="lock-button" [class.locked]="item.locked"
+                            (click)="toggleLock(item); $event.stopPropagation()">
+                            <nb-icon *ngIf="item.locked" icon="lock" pack="eva"></nb-icon>
+                            <nb-icon *ngIf="!item.locked" icon="unlock" pack="eva"></nb-icon>
+                        </button>
+                        <button nbButton ghost status="danger" size="small" class="delete-button"
+                            (click)="removeItem(item); $event.stopPropagation()">
+                            <nb-icon icon="trash-2-outline"></nb-icon>
+                        </button>
+                    </div>
                 </nb-card-header>
                 <nb-card-body>
                     <ng-container [ngSwitch]="item.type">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-register',
@@ -13,7 +14,12 @@ export class RegisterComponent implements OnInit {
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {}
+  constructor(
+    private fb: FormBuilder, 
+    private http: HttpClient, 
+    private router: Router,
+    private toastrService: NbToastrService
+  ) {}
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -41,18 +47,46 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     if (this.registerForm.valid) {
       this.http.post('http://localhost:3000/acc/register', this.registerForm.value)
-        .subscribe(response => {
-          console.log('User registered:', response);
-
-          this.successMessage = 'Đăng ký thành công!';
-          this.errorMessage = '';
-          this.router.navigate(['/login']);
-        }, error => {
+        .subscribe(
+          (response: any) => {
+            console.log('User registered:', response);
+            this.successMessage = 'Đăng ký thành công!';
+            this.errorMessage = '';
+            
+            this.toastrService.success('Đăng ký thành công!', 'Thành công', { duration: 3000 });
+            
+            setTimeout(() => {
+              this.router.navigate(['/pages/acc/login']);
+            }, 1500);
+          },
+          error => {
             console.error('Error registering user:', error);
-          // Xử lý lỗi
-          this.errorMessage = 'Đăng ký thất bại: ' + error.error;
-          this.successMessage = '';
-        });
+            
+            if (error.status === 400) {
+              this.errorMessage = 'Tên đăng nhập hoặc email đã tồn tại';
+              this.toastrService.warning(
+                'Tên đăng nhập hoặc email đã tồn tại',
+                'Cảnh báo',
+                { duration: 3000 }
+              );
+            } else if (error.status === 201) {
+              this.successMessage = 'Đăng ký thành công!';
+              this.errorMessage = '';
+              this.toastrService.success('Đăng ký thành công!', 'Thành công', { duration: 3000 });
+              setTimeout(() => {
+                this.router.navigate(['/pages/acc/login']);
+              }, 1500);
+            } else {
+              this.errorMessage = 'Có lỗi xảy ra trong quá trình đăng ký';
+              this.toastrService.danger(
+                'Có lỗi xảy ra trong quá trình đăng ký',
+                'Lỗi',
+                { duration: 3000 }
+              );
+            }
+            this.successMessage = '';
+          }
+        );
     }
   }
 }

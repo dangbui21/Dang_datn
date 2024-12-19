@@ -58,10 +58,13 @@ app.post('/acc/register', async (req, res) => {
       db.query(sql, [username, email, hashedPassword], (err, result) => {
         if (err) {
           console.error('Lỗi khi thêm người dùng vào cơ sở dữ liệu:', err);
-          return res.status(500).send(err);
+          return res.status(500).json({ error: err.message });
         }
         console.log('Người dùng đã được đăng ký thành công:', result);
-        res.status(201).send('User registered');
+        res.status(201).json({ 
+          message: 'User registered successfully',
+          success: true 
+        });
       });
     } catch (hashError) {
       console.error('Lỗi khi mã hóa mật khẩu:', hashError);
@@ -155,15 +158,21 @@ app.get('/api/load-dashboard/sql', (req, res) => {
 // API endpoint để lưu dashboard
 app.post('/api/save-dashboard/json', async (req, res) => {
   try {
-    const configPath = path.join(__dirname, '../ngx-admin/src/assets/data/dashboard-config.json');
+    const configPath = path.join(__dirname, '../frontend/src/assets/data/dashboard-config.json');
     console.log('Saving dashboard config to:', configPath);
     console.log('Dashboard data:', req.body);
+    
+    const dir = path.dirname(configPath);
+    await fs.mkdir(dir, { recursive: true });
     
     await fs.writeFile(configPath, JSON.stringify(req.body, null, 2));
     res.json({ success: true, message: 'Dashboard configuration saved successfully' });
   } catch (error) {
     console.error('Error saving dashboard:', error);
-    res.status(500).json({ error: 'Failed to save dashboard configuration' });
+    res.status(500).json({ 
+      error: 'Failed to save dashboard configuration',
+      details: error.message  // Thêm chi tiết lỗi để debug
+    });
   }
 });
 

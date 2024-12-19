@@ -1,67 +1,87 @@
 import { NbMenuItem } from '@nebular/theme';
+import { LanguageService } from '../@core/services/language.service';
+import { Injectable } from '@angular/core';
+import { AuthService } from '../@core/services/auth.service';
+import { BehaviorSubject } from 'rxjs';
 
-export const MENU_ITEMS: NbMenuItem[] = [
-  // {
-  //   title: 'E-commerce',
-  //   icon: 'shopping-cart-outline',
-  //   link: '/pages/dashboard',
-  //   home: true,
-  // },
-  // {
-  //   title: 'IoT Dashboard',
-  //   icon: 'home-outline',
-  //   link: '/pages/iot-dashboard',
-  // },
-  
-  // {
-  //   title: 'Miscellaneous',
-  //   icon: 'shuffle-2-outline',
-  //   children: [
-  //     {
-  //       title: '404',
-  //       link: '/pages/miscellaneous/404',
-  //     },
-  //   ],
-  // },
-  
-  {
-    title: 'Thị trường',
-    icon: 'trending-up-outline', 
-    link: '/pages/stock-market',
-  },
-  {
-    title: 'Biểu đồ kỹ thuật',
-    icon: 'bar-chart-outline', 
-    link: '/pages/technical-charts',
-  },
-  {
-    title: 'Biểu đồ tùy chỉnh',
-    icon: 'settings-outline',
-    link: '/pages/custom-charts',
-  },
-  {
-    title: 'Trang của tôi',
-    icon: 'person-outline', // hoặc 'home-outline'
-    link: '/pages/my-page',
-  },
-  {
-    title: 'Tài khoản',
-    icon: 'person-outline',
-    children: [
+@Injectable({
+  providedIn: 'root',
+})
+export class MenuItems {
+  private menuItems = new BehaviorSubject<NbMenuItem[]>([]);
+  menuItems$ = this.menuItems.asObservable();
+
+  constructor(
+    private languageService: LanguageService,
+    private authService: AuthService
+  ) {
+    // Lắng nghe sự thay đổi đăng nhập
+    this.authService.isLoggedIn$.subscribe(() => {
+      this.updateMenu();
+    });
+
+    // Lắng nghe sự thay đổi ngôn ngữ
+    this.languageService.currentLanguage$.subscribe(() => {
+      this.updateMenu();
+    });
+
+    // Khởi tạo menu lần đầu
+    this.updateMenu();
+  }
+
+  private updateMenu() {
+    const currentLang = this.languageService.getCurrentLanguage();
+    const user = localStorage.getItem('user');
+
+    const menuItems = [
       {
-        title: 'Đăng nhập',
-        link: '/pages/acc/login',
-        hidden: !!localStorage.getItem('user'),
+        title: currentLang === 'en' ? 'Market' : 'Thị trường',
+        icon: 'trending-up-outline',
+        link: '/pages/stock-market',
       },
       {
-        title: 'Đăng ký',
-        link: '/pages/acc/register',
-        hidden: !!localStorage.getItem('user'),
+        title: currentLang === 'en' ? 'Technical Charts' : 'Biểu đồ kỹ thuật',
+        icon: 'bar-chart-outline',
+        link: '/pages/technical-charts',
       },
       {
-        title: 'Đổi mật khẩu',
-        link: '/pages/acc/change-password',
+        title: currentLang === 'en' ? 'Custom Charts' : 'Biểu đồ tùy chỉnh',
+        icon: 'settings-outline',
+        link: '/pages/custom-charts',
       },
-    ],
-  },
-];
+      {
+        title: currentLang === 'en' ? 'My Page' : 'Trang của tôi',
+        icon: 'person-outline',
+        link: '/pages/my-page',
+      },
+      {
+        title: currentLang === 'en' ? 'Chart Guide' : 'Hướng dẫn sử dụng biểu đồ',
+        icon: 'question-mark-circle-outline',
+        link: '/pages/chart-guide',
+      },
+      {
+        title: currentLang === 'en' ? 'Account' : 'Tài khoản',
+        icon: 'person-outline',
+        children: [
+          {
+            title: currentLang === 'en' ? 'Login' : 'Đăng nhập',
+            link: '/pages/acc/login',
+            hidden: !!user,
+          },
+          {
+            title: currentLang === 'en' ? 'Register' : 'Đăng ký',
+            link: '/pages/acc/register',
+            hidden: !!user,
+          },
+          {
+            title: currentLang === 'en' ? 'Change Password' : 'Đổi mật khẩu',
+            link: '/pages/acc/change-password',
+            hidden: !user,
+          },
+        ],
+      },
+    ];
+
+    this.menuItems.next(menuItems);
+  }
+}

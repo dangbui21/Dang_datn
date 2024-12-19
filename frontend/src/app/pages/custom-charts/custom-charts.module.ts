@@ -7,6 +7,7 @@ import { TradingChartsModule } from '../trading-charts/trading-charts.module';
 import { GridsterModule } from 'angular-gridster2';
 import { FormsModule } from '@angular/forms';
 import {NbSelectModule} from '@nebular/theme';
+import { NbToastrModule } from '@nebular/theme';
 
 @NgModule({
   declarations: [CustomChartComponent],
@@ -20,6 +21,7 @@ import {NbSelectModule} from '@nebular/theme';
     GridsterModule,
     FormsModule,
     NbSelectModule,
+    NbToastrModule.forRoot(),
   ],
   exports: [CustomChartComponent, TradingChartsModule, NbSelectModule],
   

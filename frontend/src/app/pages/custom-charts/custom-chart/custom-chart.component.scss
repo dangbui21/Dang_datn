@@ -228,3 +228,126 @@ gridster-item {
 .align-items-center {
   align-items: center;
 }
+
+// Thêm styles mới
+.chart-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+nb-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+
+  .nb-text {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .delete-button {
+    opacity: 0.7;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+// Thêm styles cho tiêu đề biểu đồ
+nb-card-header {
+  .nb-text {
+    font-family: 'Roboto', 'Open Sans', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: nb-theme(text-basic-color);
+    text-transform: capitalize;
+    letter-spacing: 0.4px;
+    position: relative;
+    padding-left: 1rem;
+    margin: 0;
+    
+    // Dải màu bên trái với gradient
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 80%;
+      background: linear-gradient(
+        to bottom,
+        nb-theme(color-primary-500),
+        nb-theme(color-primary-400)
+      );
+      border-radius: 2px;
+      transition: height 0.2s ease;
+    }
+
+    // Hiệu ứng hover tinh tế hơn
+    &:hover {
+      color: nb-theme(color-primary-600);
+      
+      &::before {
+        height: 100%;
+      }
+    }
+  }
+}
+
+// Animation cho khi thêm biểu đồ mới
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+gridster-item {
+  animation: slideIn 0.3s ease-out;
+}
+
+// Thêm hiệu ứng cho card header khi hover
+.full-height {
+  nb-card-header {
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: nb-theme(card-header-basic-hover-background-color);
+      
+      .nb-text {
+        transform: translateX(5px);
+        transition: transform 0.3s ease;
+      }
+    }
+  }
+}
+
+// Thêm text shadow nhẹ cho độ sâu
+.full-height {
+  nb-card-header {
+    .nb-text {
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    }
+  }
+}

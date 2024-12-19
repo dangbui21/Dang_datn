@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import { CustomChartService } from '../custom-chart.service';
-import { NbToastrService } from '@nebular/theme';
+import { NbToastrService, NbGlobalPosition, NbGlobalPhysicalPosition } from '@nebular/theme';
 
 // Thêm export cho interface
 export interface DashboardItem extends GridsterItem {
@@ -221,12 +221,49 @@ export class CustomChartComponent implements OnInit {
       .subscribe({
         next: () => {
           console.log('Dashboard saved successfully');
-          // Thêm thông báo thành công nếu cần
+          this.toastrService.success('Cấu hình đã được lưu thành công', 'Thành công', {
+            duration: 3000,
+            position: NbGlobalPhysicalPosition.TOP_RIGHT
+          });
         },
         error: (error) => {
           console.error('Error saving dashboard:', error);
-          // Thêm thông báo lỗi nếu cần
+          this.toastrService.danger(
+            'Không thể lưu cấu hình. Vui lòng thử lại sau.',
+            'Lỗi',
+            {
+              duration: 5000,
+              position: NbGlobalPhysicalPosition.TOP_RIGHT
+            }
+          );
         }
       });
+  }
+
+  removeItem(item: DashboardItem) {
+    if (item.locked) {
+      this.toastrService.warning(
+        'Không thể xóa biểu đồ đã khóa',
+        'Cảnh báo',
+        {
+          duration: 3000,
+          position: NbGlobalPhysicalPosition.TOP_RIGHT
+        }
+      );
+      return;
+    }
+
+    const index = this.dashboard.indexOf(item);
+    if (index > -1) {
+      this.dashboard.splice(index, 1);
+      this.toastrService.success(
+        'Đã xóa biểu đồ thành công',
+        'Thành công',
+        {
+          duration: 3000,
+          position: NbGlobalPhysicalPosition.TOP_RIGHT
+        }
+      );
+    }
   }
 }

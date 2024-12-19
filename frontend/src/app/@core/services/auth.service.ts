@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { NbMenuItem } from '@nebular/theme';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class AuthService {
   private isLoggedIn = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedIn.asObservable();
 
-  constructor() {
+  constructor(private router: Router) {
     // Kiểm tra trạng thái đăng nhập khi khởi tạo service
     this.isLoggedIn.next(!!localStorage.getItem('user'));
   }
@@ -22,18 +22,10 @@ export class AuthService {
   logout() {
     localStorage.removeItem('user');
     this.isLoggedIn.next(false);
+    this.router.navigate(['/pages/acc/login']);
   }
 
-  updateMenuItems(menuItems: NbMenuItem[]) {
-    menuItems.forEach(item => {
-      if (item.children) {
-        item.children.forEach(child => {
-          if (child.title === 'Đăng nhập' || child.title === 'Đăng ký') {
-            child.hidden = this.isLoggedIn.value;
-          }
-        });
-      }
-    });
-    return menuItems;
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('user');
   }
 }

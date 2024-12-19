@@ -23,7 +23,7 @@
       "rows": 4,
       "y": 4,
       "x": 0,
-      "type": "CryptocurrencyMarket",
+      "type": "MarketQuotes",
       "dragEnabled": true,
       "resizeEnabled": true
     }

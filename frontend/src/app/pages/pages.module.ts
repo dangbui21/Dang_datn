@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbCardModule, NbMenuModule, NbToastrModule } from '@nebular/theme';
+import { NbCardModule, NbMenuModule, NbToastrModule, NbIconModule } from '@nebular/theme';
 
 
 import { ThemeModule } from '../@theme/theme.module';
@@ -15,6 +15,7 @@ import { TradingChartsModule } from './trading-charts/trading-charts.module';
 import { CustomChartsModule } from './custom-charts/custom-charts.module';
 import { MyPageModule } from './my-page/my-page.module';
 import { AccModule } from './acc/acc.module';
+import { ChartGuideComponent } from './chart-guide/chart-guide.component';
 
 
 @NgModule({
@@ -32,12 +33,14 @@ import { AccModule } from './acc/acc.module';
     MyPageModule,
     AccModule,
     NbToastrModule.forRoot(),
+    NbIconModule,
 
   ],
   declarations: [
     PagesComponent,
     TechnicalChartsComponent,
     StockMarketComponent,
+    ChartGuideComponent,
    
     
 

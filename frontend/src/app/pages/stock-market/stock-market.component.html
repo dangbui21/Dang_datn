@@ -1,93 +1,22 @@
-<h3 class="text-center mb-4">Thị Trường Chứng Khoán</h3>
+<div class="page-header">
+  <h1 class="page-title">
+    <nb-icon icon="trending-up-outline"></nb-icon>
+    <span *ngIf="currentLanguage === 'en'">Stock Market</span>
+    <span *ngIf="currentLanguage === 'vi_VN'">Thị Trường Chứng Khoán</span>
+  </h1>
+</div>
 
 <div class="container-fluid">
-    <!-- Ticker Tape -->
-    <div class="row">
-        <div class="col-12 mb-3">
+    <!-- Ticker Tape - Dải băng giá -->
+    <div class="row mb-4">
+        <div class="col-12">
             <nb-card>
-                <nb-card-header>
-                    <h4 class="nb-text">Ticker Tape</h4>
-                </nb-card-header>
-                <nb-card-body>
-                    <div class="tradingview-widget-container">
-                        <tr-ticker-tape></tr-ticker-tape>
-                    </div>
+                <nb-card-body class="p-0">
+                    <tr-ticker-tape></tr-ticker-tape>
                 </nb-card-body>
             </nb-card>
         </div>
     </div>
 
-    <!-- Market Overview -->
-    <div class="row">
-        <div class="col-12 mb-3">
-            <nb-card>
-                <nb-card-header>
-                    <h4 class="nb-text">Tổng Quan Thị Trường</h4>
-                </nb-card-header>
-                <nb-card-body>
-                    <div class="tradingview-widget-container">
-                        <tr-market-overview></tr-market-overview>
-                    </div>
-                </nb-card-body>
-            </nb-card>
-        </div>
-    </div>
-
-    <div class="col-md-12 mb-3">
-        <nb-card>
-            <nb-card-header>
-                <h4 class="nb-text">Danh Sách Nổi Bật</h4>
-            </nb-card-header>
-            <nb-card-body>
-                <div class="tradingview-widget-container">
-                    <tr-hotlist></tr-hotlist>
-                </div>
-            </nb-card-body>
-        </nb-card>
-    </div>
-
-    <!-- Market Quotes -->
-    <div class="row">
-        <div class="col-12 mb-3">
-            <nb-card>
-                <nb-card-header>
-                    <h4 class="nb-text">Bảng Báo Giá Thị Trường</h4>
-                </nb-card-header>
-                <nb-card-body>
-                    <div class="tradingview-widget-container">
-                        <tr-market-quotes></tr-market-quotes>
-                    </div>
-                </nb-card-body>
-            </nb-card>
-        </div>
-    </div>
-
-    <!-- Hotlist, Symbol Overview and Mini Chart -->
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <nb-card>
-                <nb-card-header>
-                    <h4 class="nb-text">Tổng Quan Mã Cổ Phiếu</h4>
-                </nb-card-header>
-                <nb-card-body>
-                    <div class="tradingview-widget-container">
-                        <tr-symbol-overview></tr-symbol-overview>
-                    </div>
-                </nb-card-body>
-            </nb-card>
-        </div>
-
-        <div class="col-md-6 mb-3"></div>
-        <nb-card>
-            <nb-card-header>
-                <h4 class="nb-text">Mini Chart</h4>
-            </nb-card-header>
-            <nb-card-body>
-                <div class="tradingview-widget-container">
-                    <tr-mini-chart></tr-mini-chart>
-                </div>
-            </nb-card-body>
-        </nb-card>
-    </div>
-
+    
 </div>

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
-import { MENU_ITEMS } from './pages-menu';
-import { AuthService } from '../@core/services/auth.service';
+import { MenuItems } from './pages-menu';
+import { NbMenuItem } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-pages',
-  styleUrls: ['pages.component.scss'],
   template: `
     <ngx-one-column-layout>
       <nb-menu [items]="menu"></nb-menu>
@@ -14,15 +12,13 @@ import { AuthService } from '../@core/services/auth.service';
   `,
 })
 export class PagesComponent implements OnInit {
+  menu: NbMenuItem[] = [];
 
-  menu = MENU_ITEMS;
-
-  constructor(private authService: AuthService) {
-    this.authService.isLoggedIn$.subscribe(() => {
-      this.menu = this.authService.updateMenuItems([...MENU_ITEMS]);
-    });
-  }
+  constructor(private menuItems: MenuItems) {}
 
   ngOnInit() {
+    this.menuItems.menuItems$.subscribe(items => {
+      this.menu = items;
+    });
   }
 }
