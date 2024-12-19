@@ -1,0 +1,21 @@
+@import '../shared/auth-forms.scss';
+
+:host {
+  .auth-form {
+    .accept-group {
+      margin: 1.5rem 0;
+      
+      nb-checkbox {
+        a {
+          color: nb-theme(primary-color);
+          text-decoration: none;
+          font-weight: 600;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

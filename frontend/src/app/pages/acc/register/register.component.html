@@ -1,0 +1,85 @@
+<nb-card class="auth-form">
+    <nb-card-header>
+      <h1>Đăng ký tài khoản</h1>
+    </nb-card-header>
+    
+    <nb-card-body>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-control-group">
+          <label class="label" for="username">Tên đăng nhập:</label>
+          <input nbInput
+                 fullWidth
+                 id="username"
+                 formControlName="username"
+                 placeholder="Nhập tên đăng nhập">
+          <ng-container *ngIf="registerForm.get('username').touched && registerForm.get('username').errors?.required">
+            <p class="error-message">Tên đăng nhập là bắt buộc</p>
+          </ng-container>
+        </div>
+  
+        <div class="form-control-group">
+          <label class="label" for="email">Email:</label>
+          <input nbInput
+                 fullWidth
+                 id="email"
+                 formControlName="email"
+                 placeholder="Email">
+          <ng-container *ngIf="registerForm.get('email').touched && registerForm.get('email').errors?.required">
+            <p class="error-message">Email là bắt buộc</p>
+          </ng-container>
+          <ng-container *ngIf="registerForm.get('email').touched && registerForm.get('email').errors?.email">
+            <p class="error-message">Email không hợp lệ</p>
+          </ng-container>
+          <ng-container *ngIf="registerForm.get('email').touched && registerForm.get('email').errors?.invalidEmail">
+            <p class="error-message">Email không đúng định dạng</p>
+          </ng-container>
+        </div>
+  
+        <div class="form-control-group">
+          <label class="label" for="password">Mật khẩu:</label>
+          <input nbInput
+                 fullWidth
+                 type="password"
+                 id="password"
+                 formControlName="password"
+                 placeholder="Mật khẩu">
+          <ng-container *ngIf="registerForm.get('password').touched && registerForm.get('password').errors?.required">
+            <p class="error-message">Mật khẩu là bắt buộc</p>
+          </ng-container>
+          <ng-container *ngIf="registerForm.get('password').touched && registerForm.get('password').errors?.minlength">
+            <p class="error-message">Mật khẩu phải có ít nhất 6 ký tự</p>
+          </ng-container>
+        </div>
+  
+        <div class="form-control-group">
+          <label class="label" for="confirmPassword">Xác nhận mật khẩu:</label>
+          <input nbInput
+                 fullWidth
+                 type="password"
+                 id="confirmPassword"
+                 formControlName="confirmPassword"
+                 placeholder="Xác nhận mật khẩu">
+          <ng-container *ngIf="registerForm.get('confirmPassword').touched && registerForm.get('confirmPassword').errors?.required">
+            <p class="error-message">Xác nhận mật khẩu là bắt buộc</p>
+          </ng-container>
+          <ng-container *ngIf="registerForm.errors?.mismatch && registerForm.get('confirmPassword').touched">
+            <p class="error-message">Mật khẩu và xác nhận mật khẩu không khớp</p>
+          </ng-container>
+        </div>
+  
+        <div class="form-control-group accept-group">
+          <nb-checkbox formControlName="terms">
+            Tôi đồng ý với <a href="#" target="_blank">điều khoản sử dụng</a>
+          </nb-checkbox>
+        </div>
+  
+        <button nbButton
+                fullWidth
+                status="primary"
+                [disabled]="!registerForm.valid"
+                type="submit">
+          Đăng ký
+        </button>
+      </form>
+    </nb-card-body>
+  </nb-card>

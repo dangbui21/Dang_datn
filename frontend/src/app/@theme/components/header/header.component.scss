@@ -1,0 +1,179 @@
+@import 'bootstrap/scss/mixins/breakpoints';
+@import '@nebular/theme/styles/global/breakpoints';
+@import '../../styles/themes';
+
+@include nb-install-component() {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    width: calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
+
+    .page-name {
+      font-family: 'Arial', sans-serif;
+      font-size: 28px;
+      font-weight: bold;
+      color: #007bff;
+      margin-right: 1rem;
+      text-decoration: none;
+    }
+  }
+
+  nb-action {
+    height: auto;
+    display: flex;
+    align-content: center;
+  }
+
+  /* Định dạng cho nb-select */
+.language-select nb-option {
+  display: flex;
+  align-items: center;
+}
+
+
+
+  // .theme-select, .language-select {
+  //   nb-select {
+  //     border: none; /* Bỏ border mặc định */
+  //     background: transparent;
+  //     color: #333;
+  //     font-size: 1rem;
+  
+  //     nb-option {
+  //       display: flex;
+  //       align-items: center;
+  //       padding: 0.5rem 1rem;
+  
+  //       .theme-icon, .language-icon {
+  //         display: inline-block;
+  //         width: 20px;
+  //         height: 20px;
+  //         margin-right: 0.5rem;
+  //         background-size: cover;
+  //       }
+  
+  //       /* Biểu tượng cho chủ đề */
+  //       .sun {
+  //         background-image: url('../../../../assets/images/sunsang.png'); /* Icon mặt trời */
+  //       }
+  //       .moon {
+  //         background-image: url('../../../../assets/images/moon.png'); /* Icon mặt trăng */
+  //       }
+  
+  //       /* Biểu tượng cờ */
+  //       .flag-uk {
+  //           background-image: url('../../../../assets/images/united-kingdom.png'); /* Cờ Anh */
+  //       }
+  //       .flag-vn {
+  //         background-image: url('../../../../assets/images/vietnam.png'); /* Cờ Việt Nam */
+  //       }
+  //     } 
+  //   }
+  // }
+  
+  
+
+  nb-user {
+    cursor: pointer;
+  }
+
+  ::ng-deep nb-search button {
+    padding: 0!important;
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    width: auto;
+
+    .sidebar-toggle {
+      @include nb-ltr(padding-right, 1.25rem);
+      @include nb-rtl(padding-left, 1.25rem);
+      text-decoration: none;
+      color: nb-theme(text-hint-color);
+      nb-icon {
+        font-size: 1.75rem;
+      }
+    }
+
+    .logo {
+      padding: 0 1.25rem;
+      font-size: 1.75rem;
+      @include nb-ltr(border-left, 1px solid nb-theme(divider-color));
+      @include nb-rtl(border-right, 1px solid nb-theme(divider-color));
+      white-space: nowrap;
+      text-decoration: none;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .control-item {
+      display: none;
+    }
+    .user-action {
+      border: none;
+      padding: 0;
+    }
+  }
+
+  @include media-breakpoint-down(is) {
+    nb-select {
+      display: none;
+    }
+  }
+}
+
+.stock-text, .mind-text {
+  font-family: 'Arial', sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  transition: color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+}
+
+
+
+.header-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+
+  .language-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: nb-theme(background-basic-color-1); /* Sử dụng màu nền từ Nebular */
+    border: 1px solid nb-theme(divider-color); /* Sử dụng viền từ Nebular */
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+
+    span {
+      font-size: 14px;
+      font-weight: 500;
+      color: nb-theme(text-basic-color); /* Màu chữ thay đổi theo chủ đề */
+    }
+
+    &:hover {
+      background-color: nb-theme(background-basic-color-2); /* Sử dụng màu nền hover từ Nebular */
+      border-color: nb-theme(primary-color); /* Viền hover theo màu chính của Nebular */
+      
+      span {
+        color: nb-theme(primary-color); /* Màu chữ hover theo màu chính của Nebular */
+      }
+    }
+  }
+}
+
+
+

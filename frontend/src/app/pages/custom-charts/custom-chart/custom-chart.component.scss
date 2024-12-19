@@ -1,0 +1,230 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.custom-chart-container {
+  width: 100%;
+  height: auto;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.chart-selector {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: nb-theme(card-background-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  nb-select {
+    flex: 1;
+    max-width: 300px;
+    margin-right: 1rem;
+  }
+
+  button {
+    min-width: 120px;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+gridster {
+  min-height: 100vh;
+  background: transparent;
+  margin-top: 1rem;
+}
+
+.full-height {
+  height: 100%;
+  margin: 0;
+  transition: all 0.3s ease;
+  
+  nb-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: nb-theme(card-header-basic-background-color);
+    border-bottom: 1px solid nb-theme(border-basic-color-3);
+    cursor: move;
+
+    h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: nb-theme(text-basic-color);
+    }
+
+    &:hover {
+      background: nb-theme(card-header-basic-hover-background-color);
+    }
+
+    .lock-button {
+      margin-left: auto;
+      padding: 0.6rem;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      
+      nb-icon {
+        font-size: 1.4rem;
+        transition: all 0.3s ease;
+      }
+
+      &:hover {
+        background-color: rgba(51, 102, 255, 0.1);
+        transform: scale(1.1);
+        
+        nb-icon {
+          color: #3366ff;
+        }
+      }
+
+      &.locked {
+        background-color: rgba(255, 61, 113, 0.1);
+        
+        nb-icon {
+          color: #ff3d71;
+        }
+
+        &:hover {
+          background-color: rgba(255, 61, 113, 0.2);
+          
+          nb-icon {
+            color: #db2c66;
+          }
+        }
+      }
+    }
+  }
+  
+  nb-card-body {
+    overflow: hidden;
+    padding: 1rem;
+    background: nb-theme(card-background-color);
+  }
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Thêm animation cho gridster-item
+gridster-item {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    z-index: 1;
+  }
+}
+
+// Style cho thanh scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: nb-theme(background-basic-color-2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: nb-theme(scrollbar-color);
+  border-radius: 4px;
+
+  &:hover {
+    background: nb-theme(scrollbar-hover-color);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .chart-selector {
+    flex-direction: column;
+    
+    nb-select {
+      max-width: 100%;
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+
+  
+// Thêm style cho item bị khóa
+:host ::ng-deep {
+    .gridster-item-locked {
+        pointer-events: none !important;
+        
+        nb-card-header {
+            pointer-events: all !important;
+            cursor: default !important;
+        }
+
+        // Cho phép tương tác với nút lock
+        .lock-button {
+            pointer-events: all !important;
+            z-index: 2;
+        }
+
+        // Ẩn các handle resize
+        .gridster-item-resizable-handler {
+            display: none !important;
+        }
+
+        // Vô hiệu hóa drag
+        &.gridster-item {
+            cursor: default !important;
+            transform: none !important;
+        }
+
+        // Ngăn chặn các sự kiện kéo thả
+        .drag-handler {
+            pointer-events: none !important;
+        }
+    }
+}
+
+@keyframes lockPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}

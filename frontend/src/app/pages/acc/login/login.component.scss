@@ -1,0 +1,43 @@
+@import '../shared/auth-forms.scss';
+
+:host {
+  .auth-form {
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 1.5rem 0;
+
+      .forgot-password {
+        color: nb-theme(primary-color);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.875rem;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .register-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+
+      a {
+        color: nb-theme(primary-color);
+        text-decoration: none;
+        font-weight: 600;
+        margin-left: 0.5rem;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+
+ 
+}

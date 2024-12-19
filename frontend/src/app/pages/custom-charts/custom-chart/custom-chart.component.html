@@ -1,0 +1,121 @@
+<div class="custom-chart-container">
+    <div class="chart-controls">
+        <button nbButton ghost status="primary" (click)="toggleChartSelector()">
+            <nb-icon [icon]="isChartSelectorVisible ? 'minus-outline' : 'plus-outline'"></nb-icon>
+            {{ isChartSelectorVisible ? 'Hide Chart Selector' : 'Add New Chart' }}
+        </button>
+        <button nbButton ghost status="success" (click)="saveDashboard()">
+            <nb-icon icon="save-outline"></nb-icon>
+            Lưu cấu hình
+        </button>
+    </div>
+
+    <div class="chart-selector" *ngIf="isChartSelectorVisible">
+        <nb-select [(selected)]="selectedChart" placeholder="Select a chart">
+            <!-- Advanced Charts -->
+            <nb-option-group title="Advanced Charts">
+                <nb-option value="AdvancedChart">Advanced Chart</nb-option>
+                <nb-option value="MiniChart">Mini Chart</nb-option>
+                <nb-option value="SymbolOverview">Symbol Overview</nb-option>
+            </nb-option-group>
+
+            <!-- Heatmaps -->
+            <nb-option-group title="Heatmaps">
+                <nb-option value="EtfHeatmap">ETF Heatmap</nb-option>
+                <nb-option value="StockHeatmap">Stock Heatmap</nb-option>
+                <nb-option value="CryptoCoinsHeatmap">Crypto Coins Heatmap</nb-option>
+                <nb-option value="ForexCrossRates">Forex Cross Rates</nb-option>
+                <nb-option value="ForexHeatmap">Forex Heatmap</nb-option>
+            </nb-option-group>
+
+            <!-- Market Data -->
+            <nb-option-group title="Market Data">
+                <nb-option value="HotList">Hot List</nb-option>
+                <nb-option value="MarketOverview">Market Overview</nb-option>
+                <nb-option value="MarketQuotes">Market Quotes</nb-option>
+            </nb-option-group>
+
+            <!-- News -->
+            <nb-option-group title="News">
+                <nb-option value="News">News</nb-option>
+            </nb-option-group>
+
+            <!-- Screener -->
+            <nb-option-group title="Screener">
+                <nb-option value="CryptocurrencyMarket">Cryptocurrency Market</nb-option>
+                <nb-option value="Screener">Screener</nb-option>
+            </nb-option-group>
+
+            <!-- Symbol Info -->
+            <nb-option-group title="Symbol Info">
+                <nb-option value="SymbolFinancialsData">Symbol Financials Data</nb-option>
+                <nb-option value="SymbolInfo">Symbol Info</nb-option>
+                <nb-option value="SymbolProfile">Symbol Profile</nb-option>
+                <nb-option value="SymbolTechnicalAnalysis">Symbol Technical Analysis</nb-option>
+            </nb-option-group>
+
+            <!-- Tickers -->
+            <nb-option-group title="Tickers">
+                <nb-option value="SingleTicker">Single Ticker</nb-option>
+                <nb-option value="Ticker">Ticker</nb-option>
+                <nb-option value="TickerTape">Ticker Tape</nb-option>
+            </nb-option-group>
+        </nb-select>
+        <button nbButton status="primary" (click)="addChart()">Add Chart</button>
+    </div>
+
+    <gridster [options]="options">
+        <gridster-item [item]="item" *ngFor="let item of dashboard" [ngClass]="{'gridster-item-locked': item.locked}"
+            [dragEnabled]="item.dragEnabled" [resizeEnabled]="item.resizeEnabled">
+            <nb-card class="full-height">
+                <nb-card-header class="drag-handler">
+                    <h3 class="nb-text">{{ item.type }}</h3>
+                    <button nbButton ghost size="small" class="lock-button" [class.locked]="item.locked"
+                        (click)="toggleLock(item); $event.stopPropagation()">
+                        <nb-icon *ngIf="item.locked" icon="lock" pack="eva"></nb-icon>
+                        <nb-icon *ngIf="!item.locked" icon="unlock" pack="eva"></nb-icon>
+                    </button>
+                </nb-card-header>
+                <nb-card-body>
+                    <ng-container [ngSwitch]="item.type">
+                        <!-- Advanced Charts -->
+                        <tr-advanced-chart *ngSwitchCase="'AdvancedChart'"></tr-advanced-chart>
+                        <tr-mini-chart *ngSwitchCase="'MiniChart'"></tr-mini-chart>
+                        <tr-symbol-overview *ngSwitchCase="'SymbolOverview'"></tr-symbol-overview>
+
+                        <!-- Heatmaps -->
+                        <tr-etf-heatmap *ngSwitchCase="'EtfHeatmap'"></tr-etf-heatmap>
+                        <tr-stock-heatmap *ngSwitchCase="'StockHeatmap'"></tr-stock-heatmap>
+                        <tr-crypto-coins-heatmap *ngSwitchCase="'CryptoCoinsHeatmap'"></tr-crypto-coins-heatmap>
+                        <tr-forex-cross-rates *ngSwitchCase="'ForexCrossRates'"></tr-forex-cross-rates>
+                        <tr-forex-heatmap *ngSwitchCase="'ForexHeatmap'"></tr-forex-heatmap>
+
+                        <!-- Market Data -->
+                        <tr-hotlist *ngSwitchCase="'HotList'"></tr-hotlist>
+                        <tr-market-overview *ngSwitchCase="'MarketOverview'"></tr-market-overview>
+                        <tr-market-quotes *ngSwitchCase="'MarketQuotes'"></tr-market-quotes>
+
+                        <!-- News -->
+                        <tr-news *ngSwitchCase="'News'"></tr-news>
+
+                        <!-- Screener -->
+                        <tr-cryptocurrency-market *ngSwitchCase="'CryptocurrencyMarket'"></tr-cryptocurrency-market>
+                        <tr-screener *ngSwitchCase="'Screener'"></tr-screener>
+
+                        <!-- Symbol Info -->
+                        <tr-symbol-financials-data *ngSwitchCase="'SymbolFinancialsData'"></tr-symbol-financials-data>
+                        <tr-symbol-info *ngSwitchCase="'SymbolInfo'"></tr-symbol-info>
+                        <tr-symbol-profile *ngSwitchCase="'SymbolProfile'"></tr-symbol-profile>
+                        <tr-symbol-technical-analysis
+                            *ngSwitchCase="'SymbolTechnicalAnalysis'"></tr-symbol-technical-analysis>
+
+                        <!-- Tickers -->
+                        <tr-single-ticker *ngSwitchCase="'SingleTicker'"></tr-single-ticker>
+                        <tr-ticker *ngSwitchCase="'Ticker'"></tr-ticker>
+                        <tr-ticker-tape *ngSwitchCase="'TickerTape'"></tr-ticker-tape>
+                    </ng-container>
+                </nb-card-body>
+            </nb-card>
+        </gridster-item>
+    </gridster>
+</div>

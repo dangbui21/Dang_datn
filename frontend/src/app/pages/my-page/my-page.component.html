@@ -1,0 +1,58 @@
+<nb-card>
+    <nb-card-header>
+        Trang của tôi
+    </nb-card-header>
+    <nb-card-body>
+        <gridster [options]="options" *ngIf="dashboard">
+            <gridster-item [item]="item" *ngFor="let item of dashboard; let i = index"
+                [ngClass]="{'gridster-item-locked': item.locked}">
+                <nb-card class="full-height">
+                    <nb-card-header class="drag-handler">
+                        <h3 class="nb-text">{{ item.type }}</h3>
+                        <!-- Lock button is removed to disable any changes -->
+                    </nb-card-header>
+                    <nb-card-body>
+                        <ng-container [ngSwitch]="item.type">
+                            <!-- Advanced Charts -->
+                            <tr-advanced-chart *ngSwitchCase="'AdvancedChart'"></tr-advanced-chart>
+                            <tr-mini-chart *ngSwitchCase="'MiniChart'"></tr-mini-chart>
+                            <tr-symbol-overview *ngSwitchCase="'SymbolOverview'"></tr-symbol-overview>
+
+                            <!-- Heatmaps -->
+                            <tr-etf-heatmap *ngSwitchCase="'EtfHeatmap'"></tr-etf-heatmap>
+                            <tr-stock-heatmap *ngSwitchCase="'StockHeatmap'"></tr-stock-heatmap>
+                            <tr-crypto-coins-heatmap *ngSwitchCase="'CryptoCoinsHeatmap'"></tr-crypto-coins-heatmap>
+                            <tr-forex-cross-rates *ngSwitchCase="'ForexCrossRates'"></tr-forex-cross-rates>
+                            <tr-forex-heatmap *ngSwitchCase="'ForexHeatmap'"></tr-forex-heatmap>
+
+                            <!-- Market Data -->
+                            <tr-hotlist *ngSwitchCase="'HotList'"></tr-hotlist>
+                            <tr-market-overview *ngSwitchCase="'MarketOverview'"></tr-market-overview>
+                            <tr-market-quotes *ngSwitchCase="'MarketQuotes'"></tr-market-quotes>
+
+                            <!-- News -->
+                            <tr-news *ngSwitchCase="'News'"></tr-news>
+
+                            <!-- Screener -->
+                            <tr-cryptocurrency-market *ngSwitchCase="'CryptocurrencyMarket'"></tr-cryptocurrency-market>
+                            <tr-screener *ngSwitchCase="'Screener'"></tr-screener>
+
+                            <!-- Symbol Info -->
+                            <tr-symbol-financials-data
+                                *ngSwitchCase="'SymbolFinancialsData'"></tr-symbol-financials-data>
+                            <tr-symbol-info *ngSwitchCase="'SymbolInfo'"></tr-symbol-info>
+                            <tr-symbol-profile *ngSwitchCase="'SymbolProfile'"></tr-symbol-profile>
+                            <tr-symbol-technical-analysis
+                                *ngSwitchCase="'SymbolTechnicalAnalysis'"></tr-symbol-technical-analysis>
+
+                            <!-- Tickers -->
+                            <tr-single-ticker *ngSwitchCase="'SingleTicker'"></tr-single-ticker>
+                            <tr-ticker *ngSwitchCase="'Ticker'"></tr-ticker>
+                            <tr-ticker-tape *ngSwitchCase="'TickerTape'"></tr-ticker-tape>
+                        </ng-container>
+                    </nb-card-body>
+                </nb-card>
+            </gridster-item>
+        </gridster>
+    </nb-card-body>
+</nb-card>
