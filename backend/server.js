@@ -3,67 +3,100 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const fs = require('fs').promises;
 const path = require('path');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
 
 app.use(bodyParser.json());
 
-// Kết nối đến cơ sở dữ liệu MySQL
+// Kết nối MySQL
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'root', // Thay thế bằng tên người dùng của bạn
-  password: 'Password@123', // Thay thế bằng mật khẩu của bạn
-  database: 'datn' // Tên cơ sở dữ liệu
+  port: 3300,
+  user: 'root',
+  password: 'Password@123',
+  database: 'datn'
+});
+
+db.connect((err) => {
+  if (err) {
+    console.error('Lỗi kết nối MySQL:', err);
+    return;
+  }
+  console.log('Đã kết nối thành công tới MySQL');
 });
 
 // Đăng ký người dùng
-app.post('/auth/register', async (req, res) => {
+app.post('/acc/register', async (req, res) => {
   const { username, email, password } = req.body;
 
-  // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
-  const hashedPassword = await bcrypt.hash(password, 10);
+  console.log('Yêu cầu đăng ký nhận được:', req.body);
 
-  const sql = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
-  db.query(sql, [username, email, hashedPassword], (err, result) => {
+  // Kiểm tra xem người dùng đã tồn tại chưa
+  const checkUserSql = 'SELECT * FROM users WHERE username = ? OR email = ?';
+  db.query(checkUserSql, [username, email], async (err, results) => {
     if (err) {
-      if (err.code === 'ER_DUP_ENTRY') {
-        return res.status(400).send('Username or email already exists');
-      }
+      console.error('Lỗi khi kiểm tra người dùng:', err);
       return res.status(500).send(err);
     }
-    res.status(201).send('User registered');
+    if (results.length > 0) {
+      console.log('Người dùng đã tồn tại:', results);
+      return res.status(400).send('Username or email already exists');
+    }
+
+    // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      console.log('Mật khẩu đã được mã hóa:', hashedPassword);
+
+      const sql = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
+      db.query(sql, [username, email, hashedPassword], (err, result) => {
+        if (err) {
+          console.error('Lỗi khi thêm người dùng vào cơ sở dữ liệu:', err);
+          return res.status(500).send(err);
+        }
+        console.log('Người dùng đã được đăng ký thành công:', result);
+        res.status(201).send('User registered');
+      });
+    } catch (hashError) {
+      console.error('Lỗi khi mã hóa mật khẩu:', hashError);
+      return res.status(500).send('Error hashing password');
+    }
   });
 });
 
 // Đăng nhập người dùng
-app.post('/auth/login', async (req, res) => {
+app.post('/acc/login', async (req, res) => {
   const { email, password } = req.body;
   const sql = 'SELECT * FROM users WHERE email = ?';
   
   db.query(sql, [email], async (err, results) => {
-    if (err) return res.status(500).send(err);
+    if (err) {
+      console.error('Lỗi khi truy vấn người dùng:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
     if (results.length > 0) {
       const user = results[0];
       const match = await bcrypt.compare(password, user.password);
       if (match) {
-        res.status(200).send('Login successful');
+        // Trả về phản hồi JSON
+        return res.status(200).json({ message: 'Login successful' });
       } else {
-        res.status(401).send('Invalid credentials');
+        return res.status(401).json({ error: 'Invalid credentials' });
       }
     } else {
-      res.status(401).send('Invalid credentials');
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
   });
 });
 
 // Thay đổi mật khẩu
-app.post('/auth/reset-password', (req, res) => {
+app.post('/acc/change-password', (req, res) => {
   const { username, newPassword } = req.body;
   const sql = 'UPDATE users SET password = ? WHERE username = ?';
   db.query(sql, [newPassword, username], (err, result) => {
@@ -72,8 +105,8 @@ app.post('/auth/reset-password', (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server đang chạy tại http://localhost:${PORT}`);
 });
 
 // API endpoint để lưu cấu hình dashboard vào MySQL
@@ -146,7 +179,4 @@ app.get('/api/load-dashboard/json', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Backend server running on port ${PORT}`);
-}); 
+
