@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { GridsterConfig } from 'angular-gridster2';
 import { CustomChartService } from '../custom-charts/custom-chart.service';
 import { DashboardItem } from '../custom-charts/custom-chart/custom-chart.component';
+import { AuthService } from '../../@core/services/auth.service';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-my-page',
@@ -13,28 +15,57 @@ export class MyPageComponent implements OnInit {
   options: GridsterConfig;
   
   // Mảng chứa các item trong dashboard
-  dashboard: Array<DashboardItem>;
+  dashboard: Array<DashboardItem> = [];
+  userId: number;
 
-  constructor(private customChartService: CustomChartService) {}
+  constructor(
+    private customChartService: CustomChartService,
+    private authService: AuthService,
+    private toastrService: NbToastrService,
+  ) {}
 
   ngOnInit() {
     console.log('MyPageComponent initialized');
+    this.userId = this.authService.getUserId();
+    
+    if (!this.userId) {
+      this.toastrService.warning(
+        'Vui lòng đăng nhập để xem dashboard',
+        'Cảnh báo'
+      );
+      return;
+    }
+
     // Khởi tạo cấu hình gridster
     this.initGridsterOptions();
     
-    this.customChartService.loadDashboardConfig()
+    // Load dashboard configuration
+    this.loadDashboard();
+  }
+
+  private loadDashboard() {
+    this.customChartService.loadDashboardConfigFromSQL(this.userId)
       .subscribe({
         next: (dashboard) => {
-          console.log('Dashboard Loaded:', dashboard);  // Log để kiểm tra dữ liệu
-          if (dashboard && dashboard.length > 0) {
-            this.dashboard = dashboard;
+          console.log('Dashboard Loaded:', dashboard);
+          if (Array.isArray(dashboard) && dashboard.length > 0) {
+            this.dashboard = dashboard.map(item => ({
+              ...item,
+              dragEnabled: true,
+              resizeEnabled: true
+            }));
           } else {
             this.dashboard = [];
+            this.toastrService.info('Không có cấu hình dashboard nào được tìm thấy');
           }
         },
         error: (error) => {
           console.error('Error loading dashboard:', error);
           this.dashboard = [];
+          this.toastrService.danger(
+            'Không thể tải cấu hình dashboard',
+            'Lỗi'
+          );
         }
       });
   }

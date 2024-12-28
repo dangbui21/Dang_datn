@@ -12,6 +12,7 @@ import { MyPageComponent } from './my-page/my-page.component';
 import { AccComponent } from './acc/acc.component';
 import { AuthGuard } from './acc/guards/auth.guard';
 import { ChartGuideComponent } from './chart-guide/chart-guide.component';
+import { DashboardHistoryComponent } from './custom-charts/dashboard-history/dashboard-history.component';
 
 const routes: Routes = [{
   path: '',
@@ -56,7 +57,18 @@ const routes: Routes = [{
   
     {
       path: 'custom-charts',
-      component: CustomChartComponent,
+      children: [
+        {
+          path: '',
+          component: CustomChartComponent,
+          canActivate: [AuthGuard],
+        },
+        {
+          path: 'history',
+          component: DashboardHistoryComponent,
+          canActivate: [AuthGuard],
+        }
+      ]
     },
   
     {

@@ -9,25 +9,40 @@ import { map } from 'rxjs/operators';
 })
 export class CustomChartService {
   private configPath = 'assets/data/dashboard-config.json';
+  private apiUrl = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) {}
 
   // Lưu cấu hình vào file JSON
-  saveDashboardConfig(dashboard: Array<DashboardItem>): Observable<any> {
+  saveDashboardConfigToJson(dashboard: Array<DashboardItem>): Observable<any> {
     const config = { dashboard };
-    return this.http.post('http://localhost:3000/api/save-dashboard/json', config);
+    return this.http.post(`${this.apiUrl}/save-dashboard/json`, config);
+  }
 
+  // Lưu cấu hình vào MySQL
+  saveDashboardConfigToSQL(dashboard: Array<DashboardItem>, userId: number): Observable<any> {
+    const payload = {
+      userId: userId,
+      dashboardData: dashboard
+    };
+    return this.http.post(`${this.apiUrl}/save-dashboard/sql`, payload);
   }
 
   // Đọc cấu hình từ file JSON
-  loadDashboardConfig(): Observable<Array<DashboardItem>> {
+  loadDashboardConfigFromJson(): Observable<Array<DashboardItem>> {
     return this.http.get<{ dashboard: Array<DashboardItem> }>(this.configPath)
       .pipe(
         map(response => {
-          console.log('Loaded dashboard config:', response);  // Kiểm tra dữ liệu trả về từ API
+          console.log('Loaded dashboard config from JSON:', response);
           return response.dashboard;
         })
       );
   }
-  
+
+  // Đọc cấu hình từ MySQL
+  loadDashboardConfigFromSQL(userId: number): Observable<Array<DashboardItem>> {
+    return this.http.get<Array<DashboardItem>>(`${this.apiUrl}/load-dashboard/sql`, {
+      params: { userId: userId.toString() }
+    });
+  }
 }

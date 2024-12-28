@@ -1,0 +1,47 @@
+<nb-card>
+  <nb-card-header>
+    <h2>Lịch sử tùy chỉnh Dashboard</h2>
+  </nb-card-header>
+  <nb-card-body>
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Thông tin phiên bản</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let history of historyList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>
+            <div class="history-info">
+              <nb-icon icon="clock-outline" pack="eva"></nb-icon>
+              <span class="version-time">Phiên bản: {{ history.created_at | date:'medium' }}</span>
+              <span class="update-time" *ngIf="history.updated_at !== history.created_at">
+                <nb-icon icon="sync-outline" pack="eva"></nb-icon>
+                Cập nhật: {{ history.updated_at | date:'medium' }}
+              </span>
+            </div>
+          </td>
+          <td>
+            <div class="history-actions">
+              <button nbButton ghost status="info" size="small" (click)="viewHistoryDetail(history.id)" 
+                      nbTooltip="Xem chi tiết">
+                <nb-icon icon="eye-outline" pack="eva"></nb-icon>
+              </button>
+              <button nbButton ghost status="primary" size="small" (click)="applyHistory(history.id)"
+                      nbTooltip="Áp dụng cấu hình">
+                <nb-icon icon="checkmark-circle-2-outline" pack="eva"></nb-icon>
+              </button>
+              <button nbButton ghost status="danger" size="small" (click)="deleteHistory(history.id)"
+                      nbTooltip="Xóa lịch sử">
+                <nb-icon icon="trash-2-outline" pack="eva"></nb-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </nb-card-body>
+</nb-card> 

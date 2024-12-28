@@ -4,9 +4,17 @@
             <nb-icon [icon]="isChartSelectorVisible ? 'minus-outline' : 'plus-outline'"></nb-icon>
             {{ isChartSelectorVisible ? 'Hide Chart Selector' : 'Add New Chart' }}
         </button>
+        <button nbButton ghost status="info" (click)="toggleStorageType()">
+            <nb-icon icon="swap-outline"></nb-icon>
+            {{ saveToSQL ? 'Đang lưu MySQL' : 'Đang lưu JSON' }}
+        </button>
         <button nbButton ghost status="success" (click)="saveDashboard()">
             <nb-icon icon="save-outline"></nb-icon>
             Lưu cấu hình
+        </button>
+        <button nbButton ghost status="warning" (click)="viewHistory()">
+            <nb-icon icon="clock-outline"></nb-icon>
+            Xem lịch sử
         </button>
     </div>
 

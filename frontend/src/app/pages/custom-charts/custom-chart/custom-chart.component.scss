@@ -351,3 +351,53 @@ gridster-item {
     }
   }
 }
+
+.dialog-content {
+  padding: 1rem;
+  min-width: 300px;
+
+  h3 {
+    margin-bottom: 1rem;
+    color: nb-theme(text-basic-color);
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem;
+
+  .history-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    .version-name {
+      font-weight: bold;
+      color: nb-theme(text-basic-color);
+    }
+
+    .created-at {
+      font-size: 0.85rem;
+      color: nb-theme(text-hint-color);
+    }
+  }
+}

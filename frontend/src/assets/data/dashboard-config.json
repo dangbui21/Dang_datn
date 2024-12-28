@@ -19,11 +19,11 @@
       "resizeEnabled": true
     },
     {
-      "cols": 4,
+      "cols": 7,
       "rows": 4,
       "y": 4,
       "x": 0,
-      "type": "MarketQuotes",
+      "type": "EtfHeatmap",
       "dragEnabled": true,
       "resizeEnabled": true
     }

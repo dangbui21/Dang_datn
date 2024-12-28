@@ -1,7 +1,11 @@
-import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ElementRef } from '@angular/core';
 import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import { CustomChartService } from '../custom-chart.service';
 import { NbToastrService, NbGlobalPosition, NbGlobalPhysicalPosition } from '@nebular/theme';
+import { AuthService } from '../../../@core/services/auth.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { DashboardHistoryService } from '../../../@core/services/dashboard-history.service';
 
 // Thêm export cho interface
 export interface DashboardItem extends GridsterItem {
@@ -16,7 +20,7 @@ export interface DashboardItem extends GridsterItem {
   templateUrl: './custom-chart.component.html',
   styleUrls: ['./custom-chart.component.scss']
 })
-export class CustomChartComponent implements OnInit {
+export class CustomChartComponent implements OnInit, OnDestroy {
   options: GridsterConfig;
   dashboard: Array<DashboardItem>;
   availableCharts: Array<string> = [
@@ -61,14 +65,40 @@ export class CustomChartComponent implements OnInit {
   isResizing = false;
   activeItem: DashboardItem | null = null;
   gridsterElement: HTMLElement;
+  userId: number;
+  saveToSQL = true; // Toggle giữa lưu SQL và JSON
+  private dashboardSubscription: Subscription;
 
   constructor(
     private elementRef: ElementRef,
     private customChartService: CustomChartService,
     private toastrService: NbToastrService,
-  ) {}
+    private authService: AuthService,
+    private dashboardHistoryService: DashboardHistoryService,
+    private router: Router,
+  ) {
+    this.dashboardSubscription = this.dashboardHistoryService.dashboardUpdate$
+      .subscribe(dashboard => {
+        if (dashboard && dashboard.length > 0) {
+          this.dashboard = dashboard;
+        }
+      });
+  }
 
   ngOnInit() {
+    this.userId = this.authService.getUserId();
+    if (!this.userId) {
+      this.toastrService.warning(
+        'Vui lòng đăng nhập để lưu cấu hình dashboard',
+        'Cảnh báo',
+        {
+          duration: 5000,
+          position: NbGlobalPhysicalPosition.TOP_RIGHT
+        }
+      );
+      return;
+    }
+
     this.gridsterElement = this.elementRef.nativeElement.querySelector('gridster') as HTMLElement;
     this.options = {
       gridType: 'scrollVertical',
@@ -126,10 +156,19 @@ export class CustomChartComponent implements OnInit {
       }
     };
 
-    this.dashboard = [
-      { cols: 4, rows: 4, y: 0, x: 0, type: 'AdvancedChart', dragEnabled: true, resizeEnabled: true },
-      { cols: 4, rows: 4, y: 0, x: 4, type: 'SymbolOverview', dragEnabled: true, resizeEnabled: true },
-    ];
+    if (!this.dashboard || this.dashboard.length === 0) {
+      this.dashboard = [
+        { cols: 4, rows: 4, y: 0, x: 0, type: 'AdvancedChart', dragEnabled: true, resizeEnabled: true },
+        { cols: 4, rows: 4, y: 0, x: 4, type: 'SymbolOverview', dragEnabled: true, resizeEnabled: true },
+      ];
+      this.loadDashboard();
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.dashboardSubscription) {
+      this.dashboardSubscription.unsubscribe();
+    }
   }
 
   toggleLock(item: DashboardItem) {
@@ -217,27 +256,81 @@ export class CustomChartComponent implements OnInit {
   }
 
   saveDashboard() {
-    this.customChartService.saveDashboardConfig(this.dashboard)
-      .subscribe({
-        next: () => {
-          console.log('Dashboard saved successfully');
-          this.toastrService.success('Cấu hình đã được lưu thành công', 'Thành công', {
+    const saveOperation = this.saveToSQL 
+      ? this.customChartService.saveDashboardConfigToSQL(this.dashboard, this.userId)
+      : this.customChartService.saveDashboardConfigToJson(this.dashboard);
+
+    saveOperation.subscribe({
+      next: () => {
+        const storageType = this.saveToSQL ? 'MySQL' : 'JSON';
+        this.toastrService.success(
+          `Cấu hình đã được lưu thành công vào ${storageType}`, 
+          'Thành công',
+          {
             duration: 3000,
             position: NbGlobalPhysicalPosition.TOP_RIGHT
-          });
-        },
-        error: (error) => {
-          console.error('Error saving dashboard:', error);
-          this.toastrService.danger(
-            'Không thể lưu cấu hình. Vui lòng thử lại sau.',
-            'Lỗi',
+          }
+        );
+      },
+      error: (error) => {
+        console.error('Error saving dashboard:', error);
+        this.toastrService.danger(
+          'Không thể lưu cấu hình. Vui lòng thử lại sau.',
+          'Lỗi',
+          {
+            duration: 5000,
+            position: NbGlobalPhysicalPosition.TOP_RIGHT
+          }
+        );
+      }
+    });
+  }
+
+  loadDashboard() {
+    const loadOperation = this.saveToSQL
+      ? this.customChartService.loadDashboardConfigFromSQL(this.userId)
+      : this.customChartService.loadDashboardConfigFromJson();
+
+    loadOperation.subscribe({
+      next: (data) => {
+        if (data && (!this.dashboard || this.dashboard.length === 0)) {
+          this.dashboard = data;
+          const storageType = this.saveToSQL ? 'MySQL' : 'JSON';
+          this.toastrService.success(
+            `Đã tải cấu hình từ ${storageType}`,
+            'Thành công',
             {
-              duration: 5000,
+              duration: 3000,
               position: NbGlobalPhysicalPosition.TOP_RIGHT
             }
           );
         }
-      });
+      },
+      error: (error) => {
+        console.error('Error loading dashboard:', error);
+        this.toastrService.danger(
+          'Không thể tải cấu hình. Đang sử dụng cấu hình mặc định.',
+          'Lỗi',
+          {
+            duration: 5000,
+            position: NbGlobalPhysicalPosition.TOP_RIGHT
+          }
+        );
+      }
+    });
+  }
+
+  toggleStorageType() {
+    this.saveToSQL = !this.saveToSQL;
+    const storageType = this.saveToSQL ? 'MySQL' : 'JSON';
+    this.toastrService.info(
+      `Đã chuyển sang lưu trữ ${storageType}`,
+      'Thông báo',
+      {
+        duration: 2000,
+        position: NbGlobalPhysicalPosition.TOP_RIGHT
+      }
+    );
   }
 
   removeItem(item: DashboardItem) {
@@ -265,5 +358,9 @@ export class CustomChartComponent implements OnInit {
         }
       );
     }
+  }
+
+  viewHistory() {
+    this.router.navigate(['/pages/custom-charts/history']);
   }
 }

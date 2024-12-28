@@ -48,6 +48,18 @@ export class MenuItems {
         title: currentLang === 'en' ? 'Custom Charts' : 'Biểu đồ tùy chỉnh',
         icon: 'settings-outline',
         link: '/pages/custom-charts',
+        children: [
+          {
+            title: currentLang === 'en' ? 'Custom' : 'Tùy chỉnh',
+            link: '/pages/custom-charts',
+            
+          },
+          {
+            title: currentLang === 'en' ? 'Histoty' : 'Lịch sử',
+            link: '/pages/custom-charts/history',
+            
+          },
+        ],
       },
       {
         title: currentLang === 'en' ? 'My Page' : 'Trang của tôi',

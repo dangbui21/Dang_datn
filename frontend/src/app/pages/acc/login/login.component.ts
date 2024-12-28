@@ -40,14 +40,17 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
       this.http.post('http://localhost:3000/acc/login', this.loginForm.value)
-        .subscribe(response => {
-          console.log('Đăng nhập thành công:', response);
-          this.successMessage = 'Đăng nhập thành công!';
-          this.authService.login(response); // Sử dụng service để đăng nhập
-          this.router.navigate(['/pages/stock-market']);
-        }, error => {
-          this.errorMessage = 'Thông tin tài khoản hoặc mật khẩu không chính xác';
-          console.error('Lỗi đăng nhập:', error);
+        .subscribe({
+          next: (response: any) => {
+            console.log('Đăng nhập thành công:', response);
+            this.successMessage = 'Đăng nhập thành công!';
+            this.authService.login(response); // Lưu thông tin user vào AuthService
+            this.router.navigate(['/pages/stock-market']);
+          },
+          error: (error) => {
+            this.errorMessage = 'Thông tin tài khoản hoặc mật khẩu không chính xác';
+            console.error('Lỗi đăng nhập:', error);
+          }
         });
     }
   }
