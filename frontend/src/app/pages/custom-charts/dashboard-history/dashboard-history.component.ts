@@ -4,7 +4,6 @@ import { AuthService } from '../../../@core/services/auth.service';
 import { Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
 
-
 @Component({
   selector: 'ngx-dashboard-history',
   templateUrl: './dashboard-history.component.html',
@@ -12,16 +11,14 @@ import { NbToastrService } from '@nebular/theme';
 })
 export class DashboardHistoryComponent implements OnInit {
   historyList: any[] = [];
-  selectedHistory: any = null;
   userId: number;
 
   constructor(
-    private historyService: DashboardHistoryService,
+    private dashboardHistoryService: DashboardHistoryService,
     private authService: AuthService,
     private router: Router,
-    private toastrService: NbToastrService,
-    private dashboardHistoryService: DashboardHistoryService
-  ) { }
+    private toastrService: NbToastrService
+  ) {}
 
   ngOnInit() {
     this.userId = this.authService.getUserId();
@@ -31,7 +28,7 @@ export class DashboardHistoryComponent implements OnInit {
   }
 
   loadHistoryList() {
-    this.historyService.getHistoryList(this.userId).subscribe({
+    this.dashboardHistoryService.getHistoryList(this.userId).subscribe({
       next: (data) => {
         this.historyList = data;
       },
@@ -42,7 +39,7 @@ export class DashboardHistoryComponent implements OnInit {
   }
 
   viewHistoryDetail(historyId: number) {
-    this.historyService.getHistoryDetail(historyId).subscribe({
+    this.dashboardHistoryService.getHistoryDetail(historyId).subscribe({
       next: (data) => {
         this.dashboardHistoryService.updateDashboard(data);
         this.router.navigate(['/pages/custom-charts']);
@@ -54,7 +51,7 @@ export class DashboardHistoryComponent implements OnInit {
   }
 
   applyHistory(historyId: number) {
-    this.historyService.applyHistoryConfig(historyId, this.userId).subscribe({
+    this.dashboardHistoryService.applyHistoryConfig(historyId, this.userId).subscribe({
       next: () => {
         this.toastrService.success('Áp dụng cấu hình thành công', 'Thành công');
         this.router.navigate(['/pages/custom-charts']);

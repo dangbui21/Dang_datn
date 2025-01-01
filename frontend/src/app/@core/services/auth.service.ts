@@ -18,23 +18,26 @@ export class AuthService {
   private currentUser: User | null = null;
 
   constructor(private router: Router) {
-    // Kiểm tra trạng thái đăng nhập khi khởi tạo service
+    // Kiểm tra cả user và token khi khởi tạo
     const userData = localStorage.getItem('user');
-    if (userData) {
+    const token = localStorage.getItem('token');
+    if (userData && token) {
       this.currentUser = JSON.parse(userData);
       this.isLoggedIn.next(true);
     }
   }
 
-  login(userData: any) {
-    this.currentUser = userData.user || userData; // Tùy thuộc vào response format
-    localStorage.setItem('user', JSON.stringify(this.currentUser));
+  login(response: any) {
+    this.currentUser = response.user;
+    localStorage.setItem('user', JSON.stringify(response.user));
+    localStorage.setItem('token', response.token); // Lưu token
     this.isLoggedIn.next(true);
   }
 
   logout() {
     this.currentUser = null;
     localStorage.removeItem('user');
+    localStorage.removeItem('token'); // Xóa token
     this.isLoggedIn.next(false);
     this.router.navigate(['/pages/acc/login']);
   }

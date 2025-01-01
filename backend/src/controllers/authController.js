@@ -28,14 +28,36 @@ class AuthController {
     const { email, password } = req.body;
     try {
       const user = await UserModel.findByEmail(email);
+      
+      // Kiểm tra user tồn tại
       if (!user) {
-        return res.status(401).json({ error: 'Invalid credentials' });
+        return res.status(401).json({ 
+          success: false,
+          message: 'Email hoặc mật khẩu không chính xác' 
+        });
       }
 
+      // Chỉ kiểm tra trạng thái banned
+      if (user.status === 'banned') {
+        return res.status(403).json({ 
+          success: false,
+          message: 'Tài khoản của bạn đã bị cấm. Vui lòng liên hệ quản trị viên để biết thêm chi tiết.' 
+        });
+      }
+
+      // Kiểm tra mật khẩu
       const match = await bcrypt.compare(password, user.password);
       if (!match) {
-        return res.status(401).json({ error: 'Invalid credentials' });
+        return res.status(401).json({ 
+          success: false,
+          message: 'Email hoặc mật khẩu không chính xác' 
+        });
       }
+
+      // Thêm cảnh báo nếu tài khoản inactive
+      const warningMessage = user.status === 'inactive' 
+        ? 'Tài khoản của bạn đang ở trạng thái không hoạt động. Một số tính năng có thể bị hạn chế.'
+        : null;
 
       const userResponse = {
         id: user.id,
@@ -46,12 +68,17 @@ class AuthController {
       };
 
       res.status(200).json({ 
-        message: 'Login successful',
+        success: true,
+        message: 'Đăng nhập thành công',
+        warning: warningMessage,
         user: userResponse 
       });
     } catch (error) {
       console.error('Lỗi đăng nhập:', error);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ 
+        success: false,
+        message: 'Lỗi hệ thống' 
+      });
     }
   }
 

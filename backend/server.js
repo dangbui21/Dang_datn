@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const authRoutes = require('./src/routes/authRoutes');
 const dashboardRoutes = require('./src/routes/dashboardRoutes');
+const adminRoutes = require('./src/routes/adminRoutes'); 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 // Routes
 app.use('/acc', authRoutes);
 app.use('/api', dashboardRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server đang chạy tại http://localhost:${PORT}`);

@@ -43,6 +43,41 @@ class UserModel {
       });
     });
   }
+
+  static async getAllUsers() {
+    return new Promise((resolve, reject) => {
+      const sql = 'SELECT id, username, email, status, role, created_at FROM users';
+      db.query(sql, (err, results) => {
+        if (err) reject(err);
+        resolve(results);
+      });
+    });
+  }
+
+  static async searchUsers(searchTerm) {
+    return new Promise((resolve, reject) => {
+      const sql = `
+        SELECT id, username, email, status, role, created_at 
+        FROM users 
+        WHERE username LIKE ? OR email LIKE ?
+      `;
+      const searchPattern = `%${searchTerm}%`;
+      db.query(sql, [searchPattern, searchPattern], (err, results) => {
+        if (err) reject(err);
+        resolve(results);
+      });
+    });
+  }
+
+  static async updateUserStatus(userId, status) {
+    return new Promise((resolve, reject) => {
+      const sql = 'UPDATE users SET status = ? WHERE id = ?';
+      db.query(sql, [status, userId], (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      });
+    });
+  }
 }
 
 module.exports = UserModel;

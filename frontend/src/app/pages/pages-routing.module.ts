@@ -18,14 +18,6 @@ const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
-    // {
-    //   path: 'dashboard',
-    //   component: ECommerceComponent,
-    // },
-    // {
-    //   path: 'iot-dashboard',
-    //   component: DashboardComponent,
-    // },
     {
       path: 'stock-market',
       component: StockMarketComponent,
@@ -34,27 +26,6 @@ const routes: Routes = [{
       path: 'technical-charts',
       component: TechnicalChartsComponent,
     },
-    {
-      path: 'custom-charts',
-      component: CustomChartComponent,
-      canActivate: [AuthGuard]
-    },
-    {
-      path: 'my-page',
-      component: MyPageComponent,  
-      canActivate: [AuthGuard]
-    },
-    {
-      path: 'chart-guide',
-      component: ChartGuideComponent,
-    },
-    {
-      path: 'acc',
-      component: AccComponent,
-      loadChildren: () => import('./acc/acc-routing.module').then(m => m.AccRoutingModule),
-    },
-    
-  
     {
       path: 'custom-charts',
       children: [
@@ -70,17 +41,29 @@ const routes: Routes = [{
         }
       ]
     },
-  
     {
-      path: '',
-      redirectTo: 'dashboard',
-      pathMatch: 'full',
+      path: 'my-page',
+      component: MyPageComponent,  
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'chart-guide',
+      component: ChartGuideComponent,
+    },
+    {
+      path: 'acc',
+      component: AccComponent,
+      loadChildren: () => import('./acc/acc-routing.module').then(m => m.AccRoutingModule),
+    },
+    {
+      path: 'user-management',
+      loadChildren: () => import('./user-management/user-management.module')
+        .then(m => m.UserManagementModule),
     },
     {
       path: '**',
       component: NotFoundComponent,
     },
-
   ],
 }];
 

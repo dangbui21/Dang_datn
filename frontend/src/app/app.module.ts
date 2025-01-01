@@ -21,7 +21,6 @@ import {
   NbDialogModule,
   NbMenuModule,
   NbSidebarModule,
-  NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
 import { TradingChartsComponent } from './pages/trading-charts/trading-charts.component';
@@ -40,7 +39,6 @@ import { TradingChartsComponent } from './pages/trading-charts/trading-charts.co
     NbDatepickerModule.forRoot(),
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
-    NbToastrModule.forRoot(),
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),

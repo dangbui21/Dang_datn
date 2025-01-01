@@ -92,6 +92,12 @@ export class MenuItems {
           },
         ],
       },
+      {
+        title: currentLang === 'en' ? 'User Management' : 'Quản lý người dùng',
+        icon: 'people-outline',
+        link: '/pages/user-management',
+        hidden: !user || JSON.parse(user).role !== 'admin', // Chỉ hiện khi là admin
+      },
     ];
 
     this.menuItems.next(menuItems);

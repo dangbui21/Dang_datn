@@ -1,0 +1,51 @@
+<nb-card>
+  <nb-card-header>
+    <div class="d-flex justify-content-between align-items-center">
+      <h5>Quản lý người dùng</h5>
+      <div class="d-flex align-items-center">
+        <input
+          nbInput
+          [(ngModel)]="searchTerm"
+          placeholder="Tìm kiếm..."
+          (keyup.enter)="onSearch()"
+        />
+        <button nbButton status="primary" class="ml-2" (click)="onSearch()">
+          <nb-icon icon="search-outline"></nb-icon>
+        </button>
+      </div>
+    </div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Tên người dùng</th>
+          <th>Email</th>
+          <th>Trạng thái</th>
+          <th>Vai trò</th>
+          <th>Ngày tạo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <nb-select [selected]="user.status" (selectedChange)="updateUserStatus(user.id, $event)">
+              <nb-option value="active">Hoạt động</nb-option>
+              <nb-option value="inactive">Không hoạt động</nb-option>
+              <nb-option value="banned">Bị cấm</nb-option>
+            </nb-select>
+          </td>
+          <td>{{ user.role }}</td>
+          <td>{{ user.created_at | date:'dd/MM/yyyy' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="loading" class="d-flex justify-content-center mt-4">
+      <nb-spinner></nb-spinner>
+    </div>
+  </nb-card-body>
+</nb-card> 
