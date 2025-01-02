@@ -1,0 +1,123 @@
+// Định nghĩa các biến cho chiều cao
+:host {
+  
+  --heatmap-height: 500px;
+  --hotlist-height: 500px;
+  --market-overview-height: 550px;
+  --screener-height: 550px;
+}
+
+// Áp dụng chiều cao cho từng loại biểu đồ
+.container-fluid {
+  // Ticker tape
+  tr-ticker-tape {
+    display: block;
+    height: var(--ticker-height);
+  }
+
+  // Heatmap
+  tr-stock-heatmap {
+    display: block;
+    height: var(--heatmap-height);
+  }
+
+  // Hotlist
+  tr-hotlists {
+    display: block;
+    height: var(--hotlist-height);
+  }
+
+  // Market Overview
+  tr-market-overview {
+    display: block;
+    height: var(--market-overview-height);
+  }
+
+  // Screener
+  tr-screener {
+    display: block;
+    height: var(--screener-height);
+  }
+
+  // Đảm bảo card body phù hợp với nội dung
+  nb-card-body {
+    padding: 1rem;
+    height: 100%;
+    overflow: auto;
+  }
+
+  // Đảm bảo card có chiều cao phù hợp với content
+  nb-card {
+    margin-bottom: 1.5rem;
+    height: calc(100% - 1.5rem); // Trừ đi margin-bottom
+  }
+}
+
+// Media queries để responsive
+@media screen and (max-width: 768px) {
+  :host {
+    --heatmap-height: 300px;
+    --hotlist-height: 300px;
+    --market-overview-height: 300px;
+    --screener-height: 300px;
+  }
+}
+
+:host {
+  .page-header {
+    margin-bottom: 2rem;
+    
+    .h1 {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      
+      nb-icon {
+        margin-right: 0.75rem;
+      }
+    }
+
+    .subtitle-2 {
+      font-size: 1.1rem;
+      
+      nb-icon {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  nb-card {
+    nb-card-header {
+      padding: 1.25rem 1.5rem;
+      
+      .h5 {
+        font-size: 1.25rem;
+        font-weight: 600;
+
+        nb-icon {
+          vertical-align: middle;
+          margin-right: 0.5rem;
+          color: nb-theme(color-primary-500);
+        }
+      }
+
+      small {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .ticker-note {
+    padding: 0.5rem 1rem;
+    background-color: #f7f9fc;
+    border-bottom: 1px solid #edf1f7;
+
+    small {
+      nb-icon {
+        font-size: 0.9rem;
+        vertical-align: middle;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+

@@ -1,22 +1,114 @@
 <div class="page-header">
-  <h1 class="page-title">
-    <nb-icon icon="trending-up-outline"></nb-icon>
+  <h1 class="h1">
+    <nb-icon icon="trending-up-outline" class="h4"></nb-icon>
     <span *ngIf="currentLanguage === 'en'">Stock Market</span>
     <span *ngIf="currentLanguage === 'vi_VN'">Thị Trường Chứng Khoán</span>
   </h1>
+ 
 </div>
 
 <div class="container-fluid">
-    <!-- Ticker Tape - Dải băng giá -->
+    <!-- Ticker Tape -->
     <div class="row mb-4">
         <div class="col-12">
             <nb-card>
                 <nb-card-body class="p-0">
+                
                     <tr-ticker-tape></tr-ticker-tape>
                 </nb-card-body>
             </nb-card>
         </div>
     </div>
 
-    
+    <!-- Stock Heatmap -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <nb-card>
+                <nb-card-header>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="h5 mb-0">
+                                <nb-icon icon="activity-outline"></nb-icon>
+                                <span *ngIf="currentLanguage === 'en'">Market Heatmap</span>
+                                <span *ngIf="currentLanguage === 'vi_VN'">Bản Đồ Nhiệt Thị Trường</span>
+                            </h5>
+                            <span class="subtitle-2 text-hint d-block mt-1">
+                                <span *ngIf="currentLanguage === 'en'">Visual representation of market performance</span>
+                                <span *ngIf="currentLanguage === 'vi_VN'">Biểu đồ nhiệt hiệu suất thị trường</span>
+                            </span>
+                        </div>
+                    </div>
+                </nb-card-header>
+                <nb-card-body>
+                    <tr-stock-heatmap></tr-stock-heatmap>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+
+    <!-- Market Overview & Market Quotes Row -->
+    <div class="row mb-4">
+        <div class="col-6">
+            <nb-card>
+                <nb-card-header>
+                    <h5 class="h5 mb-0">
+                        <nb-icon icon="pie-chart-outline"></nb-icon>
+                        <span *ngIf="currentLanguage === 'en'">Market Overview</span>
+                        <span *ngIf="currentLanguage === 'vi_VN'">Tổng Quan Thị Trường</span>
+                    </h5>
+                    <span class="subtitle-2 text-hint d-block mt-1">
+                        <span *ngIf="currentLanguage === 'en'">Key market indicators and trends</span>
+                        <span *ngIf="currentLanguage === 'vi_VN'">Các chỉ số và xu hướng chính của thị trường</span>
+                    </span>
+                </nb-card-header>
+                <nb-card-body>
+                    <tr-market-overview></tr-market-overview>
+                </nb-card-body>
+            </nb-card>
+        </div>
+        <div class="col-6">
+            <nb-card>
+                <nb-card-header>
+                    <h5 class="h5 mb-0">
+                        <nb-icon icon="trending-up-outline"></nb-icon>
+                        <span *ngIf="currentLanguage === 'en'">Market Quotes</span>
+                        <span *ngIf="currentLanguage === 'vi_VN'">Báo Giá Thị Trường</span>
+                    </h5>
+                    <span class="subtitle-2 text-hint d-block mt-1">
+                        <span *ngIf="currentLanguage === 'en'">Real-time stock quotes and changes</span>
+                        <span *ngIf="currentLanguage === 'vi_VN'">Giá cổ phiếu và biến động theo thời gian thực</span>
+                    </span>
+                </nb-card-header>
+                <nb-card-body>
+                    <tr-market-quotes></tr-market-quotes>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+
+    <!-- Market Screener -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <nb-card>
+                <nb-card-header>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="h5 mb-0">
+                                <nb-icon icon="options-2-outline"></nb-icon>
+                                <span *ngIf="currentLanguage === 'en'">Market Screener</span>
+                                <span *ngIf="currentLanguage === 'vi_VN'">Bộ Lọc Thị Trường</span>
+                            </h5>
+                            <span class="subtitle-2 text-hint d-block mt-1">
+                                <span *ngIf="currentLanguage === 'en'">Advanced stock screening and filtering tools</span>
+                                <span *ngIf="currentLanguage === 'vi_VN'">Công cụ lọc và sàng lọc cổ phiếu nâng cao</span>
+                            </span>
+                        </div>
+                    </div>
+                </nb-card-header>
+                <nb-card-body>
+                    <tr-screener></tr-screener>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
 </div>

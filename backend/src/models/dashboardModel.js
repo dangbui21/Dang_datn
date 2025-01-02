@@ -19,14 +19,30 @@ class DashboardModel {
   static async loadDashboard(userId) {
     return new Promise((resolve, reject) => {
       const sql = `
-        SELECT dashboard_data 
+        SELECT id, user_id, dashboard_data, updated_at
         FROM dashboard 
         WHERE user_id = ? 
-        ORDER BY created_at DESC 
+        ORDER BY updated_at DESC
         LIMIT 1
       `;
+      console.log('Executing SQL query:', sql);
+      console.log('With userId:', userId);
+      
       db.query(sql, [userId], (err, results) => {
-        if (err) reject(err);
+        if (err) {
+          console.error('Database error:', err);
+          reject(err);
+        }
+        console.log('Raw database results:', results);
+        
+        if (results && results.length > 0) {
+          console.log('Found dashboard with id:', results[0].id);
+          console.log('For user_id:', results[0].user_id);
+          console.log('Updated at:', results[0].updated_at);
+        } else {
+          console.log('No dashboard found for userId:', userId);
+        }
+        
         resolve(results[0]?.dashboard_data || []);
       });
     });
@@ -38,7 +54,7 @@ class DashboardModel {
         SELECT id, dashboard_data, created_at, updated_at
         FROM dashboard 
         WHERE user_id = ?
-        ORDER BY created_at DESC
+        ORDER BY updated_at DESC
       `;
       db.query(sql, [userId], (err, results) => {
         if (err) reject(err);

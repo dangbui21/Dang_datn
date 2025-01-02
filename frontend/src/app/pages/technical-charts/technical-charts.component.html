@@ -1,12 +1,25 @@
+<div class="page-header">
+  <div class="header-content">
+    <div class="title-section">
+      <h1 class="h1 header-title">
+        <nb-icon icon="bar-chart-outline" class="header-icon pulse"></nb-icon>
+        <span class="gradient-text" *ngIf="currentLanguage === 'en'">Technical Charts</span>
+        <span class="gradient-text" *ngIf="currentLanguage === 'vi_VN'">Biểu Đồ Kỹ Thuật</span>
+      </h1>
+      <p class="subtitle-2 text-hint header-subtitle">
+        <nb-icon icon="info-outline"></nb-icon>
+        <span *ngIf="currentLanguage === 'en'">Advanced technical analysis tools and charts</span>
+        <span *ngIf="currentLanguage === 'vi_VN'">Công cụ và biểu đồ phân tích kỹ thuật nâng cao</span>
+      </p>
+    </div>
+  </div>
+</div>
+
 <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
-    <nb-card-header>
-        <h1 class="nb-text">Biểu đồ kỹ thuật </h1>
-    </nb-card-header>
     <nb-card-body class="chart-body">
         <div class="container-fluid d-flex" style="height: 100vh; padding: 0;">
             <div class="tradingview-widget-container flex-fill">
                 <tr-advanced-chart></tr-advanced-chart>
-
             </div>
         </div>
     </nb-card-body>

@@ -21,7 +21,12 @@ class DashboardController {
     try {
       const userId = req.query.userId;
       console.log('Loading dashboard for userId:', userId);
+      console.log('Request query:', req.query);
+      console.log('Request params:', req.params);
+      
       const dashboardData = await DashboardModel.loadDashboard(userId);
+      console.log('Dashboard data from DB:', dashboardData);
+      
       res.status(200).json(dashboardData);
     } catch (error) {
       console.error('Error loading dashboard:', error);

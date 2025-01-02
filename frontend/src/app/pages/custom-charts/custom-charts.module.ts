@@ -20,7 +20,7 @@ import { NbToastrModule } from '@nebular/theme';
   imports: [
     CommonModule,
     CustomChartsRoutingModule,
-    
+    TradingChartsModule,
     GridsterModule,
 
     NbCardModule,

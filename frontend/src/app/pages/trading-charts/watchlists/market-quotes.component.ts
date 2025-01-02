@@ -16,8 +16,8 @@ export class MarketQuotesComponent extends TradingViewBaseComponent {
     script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js';
     script.async = true;
     script.innerHTML = JSON.stringify({
-        "width": 650,
-        "height": 550,
+        "width": "100%",
+        "height": "100%",
         "colorTheme": (theme === 'dark' || theme === 'cosmic') ? 'dark' : 'light',// xử lý chủ đề của char phù hợp với chủ đề chính
         "symbolsGroups": [
           {
