@@ -2,8 +2,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ECommerceComponent } from './e-commerce/e-commerce.component';
+
+
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { TechnicalChartsComponent } from './technical-charts/technical-charts.component';
 import { StockMarketComponent } from './stock-market/stock-market.component';
@@ -52,8 +52,7 @@ const routes: Routes = [{
     },
     {
       path: 'acc',
-      component: AccComponent,
-      loadChildren: () => import('./acc/acc-routing.module').then(m => m.AccRoutingModule),
+      loadChildren: () => import('./acc/acc.module').then(m => m.AccModule),
     },
     {
       path: 'user-management',

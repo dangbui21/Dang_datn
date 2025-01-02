@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
-import { UserManagementService } from '../../@core/services/user-management.service';
+import { UserManagementService } from './user-management.service';
 import { AuthService } from '../../@core/services/auth.service';
 import { Router } from '@angular/router';
 

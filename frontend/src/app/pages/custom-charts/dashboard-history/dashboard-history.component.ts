@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardHistoryService } from '../../../@core/services/dashboard-history.service';
+import { DashboardHistoryService } from './dashboard-history.service';
 import { AuthService } from '../../../@core/services/auth.service';
 import { Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { DashboardItem } from '../../pages/custom-charts/custom-chart/custom-chart.component';
+import { DashboardItem } from '../custom-chart/custom-chart.component';
 
 @Injectable({
   providedIn: 'root'

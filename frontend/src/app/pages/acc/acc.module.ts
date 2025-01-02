@@ -33,6 +33,7 @@ import { AccComponent } from './acc.component';
     NbButtonModule,
     NbCheckboxModule,
     NbLayoutModule
-  ]
+  ],
+  providers: []
 })
 export class AccModule { }

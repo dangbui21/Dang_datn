@@ -9,9 +9,7 @@ import {
 import { Observable } from 'rxjs';
 import { NbToastrService } from '@nebular/theme';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,

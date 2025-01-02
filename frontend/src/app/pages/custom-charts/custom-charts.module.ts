@@ -20,17 +20,19 @@ import { NbToastrModule } from '@nebular/theme';
   imports: [
     CommonModule,
     CustomChartsRoutingModule,
-    MatGridListModule,
+    
+    GridsterModule,
+
     NbCardModule,
     NbButtonModule,
     NbIconModule,
-    TradingChartsModule,
-    GridsterModule,
-    FormsModule,
     NbSelectModule,
     NbListModule,
-    NbToastrModule.forRoot(),
     NbTooltipModule,
+    NbToastrModule.forRoot(),
+    
+    MatGridListModule,
+    FormsModule,
   ],
   exports: [CustomChartComponent, TradingChartsModule, NbSelectModule, DashboardHistoryComponent],
   

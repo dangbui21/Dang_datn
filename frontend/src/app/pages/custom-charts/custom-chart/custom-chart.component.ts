@@ -5,7 +5,7 @@ import { NbToastrService, NbGlobalPosition, NbGlobalPhysicalPosition } from '@ne
 import { AuthService } from '../../../@core/services/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { DashboardHistoryService } from '../../../@core/services/dashboard-history.service';
+import { DashboardHistoryService } from '../dashboard-history/dashboard-history.service';
 
 // Thêm export cho interface
 export interface DashboardItem extends GridsterItem {

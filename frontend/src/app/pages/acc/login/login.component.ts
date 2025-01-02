@@ -41,21 +41,16 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.loginForm.valid) {
       this.loading = true;
-      this.errorMessage = '';
+      this.errorMessage = ''; // Reset error message
       this.http.post('http://localhost:3000/acc/login', this.loginForm.value)
         .subscribe({
           next: (response: any) => {
             if (response.success) {
               this.authService.login(response);
-              
-              // Hiển thị thông báo thành công
               this.toastrService.success('Đăng nhập thành công', 'Thành công');
-              
-              // Hiển thị cảnh báo nếu tài khoản inactive
               if (response.warning) {
                 this.toastrService.warning(response.warning, 'Cảnh báo');
               }
-              
               this.router.navigate(['/pages/stock-market']);
             }
           },
