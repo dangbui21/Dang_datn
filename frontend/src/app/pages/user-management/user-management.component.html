@@ -33,9 +33,18 @@
           <td>{{ user.email }}</td>
           <td>
             <nb-select [selected]="user.status" (selectedChange)="updateUserStatus(user.id, $event)">
-              <nb-option value="active">Hoạt động</nb-option>
-              <nb-option value="inactive">Không hoạt động</nb-option>
-              <nb-option value="banned">Bị cấm</nb-option>
+              <nb-option value="active">
+                <nb-icon icon="checkmark-circle" status="success"></nb-icon>
+                Hoạt động
+              </nb-option>
+              <nb-option value="inactive">
+                <nb-icon icon="pause-circle" status="warning"></nb-icon>
+                Tạm khóa
+              </nb-option>
+              <nb-option value="banned">
+                <nb-icon icon="slash" status="danger"></nb-icon>
+                Cấm vĩnh viễn
+              </nb-option>
             </nb-select>
           </td>
           <td>{{ user.role }}</td>

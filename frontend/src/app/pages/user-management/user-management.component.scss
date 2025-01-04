@@ -12,4 +12,25 @@
 
 table {
   width: 100%;
+}
+
+.status-badge {
+  padding: 0.3rem 0.6rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  
+  &.active {
+    background-color: #00d68f;
+    color: white;
+  }
+  
+  &.inactive {
+    background-color: #ffaa00;
+    color: white;
+  }
+  
+  &.banned {
+    background-color: #ff3d71;
+    color: white;
+  }
 } 

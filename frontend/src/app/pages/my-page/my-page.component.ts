@@ -44,13 +44,10 @@ export class MyPageComponent implements OnInit {
   }
 
   private loadDashboard() {
-    console.log('Sending request for userId:', this.userId);
-    
     this.customChartService.loadDashboardConfigFromSQL(this.userId)
       .subscribe({
         next: (dashboard) => {
-          console.log('Response from server:', dashboard);
-          console.log('Current userId:', this.userId);
+          console.log('Dashboard Loaded:', dashboard);
           if (Array.isArray(dashboard) && dashboard.length > 0) {
             this.dashboard = dashboard.map(item => ({
               ...item,
@@ -88,20 +85,12 @@ export class MyPageComponent implements OnInit {
       },
       resizable: {
         enabled: true,
-        handles: {
-          s: true, e: true, n: true, w: true,
-          se: true, ne: true, sw: true, nw: true
-        }
       },
-     
-      disablePushOnDrag: false,
-      disablePushOnResize: false,
-      pushDirections: { north: true, east: true, south: true, west: true },
-      minCols: 24,
-      maxCols: 24,
+      minCols: 8,
+      maxCols: 8,
       minRows: 1,
       maxRows: 100,
-      maxItemCols: 24,
+      maxItemCols: 8,
       minItemCols: 1,
       maxItemRows: 100,
       minItemRows: 1,

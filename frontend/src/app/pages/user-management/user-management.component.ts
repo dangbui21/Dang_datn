@@ -78,17 +78,45 @@ export class UserManagementComponent implements OnInit {
   }
 
   updateUserStatus(userId: number, newStatus: string) {
-    this.userManagementService.updateUserStatus(userId, newStatus).subscribe({
-      next: (response) => {
-        this.toastrService.success('Cập nhật trạng thái thành công', 'Thành công');
-        this.loadUsers();
-      },
-      error: (error) => {
-        this.toastrService.danger(
-          error.message || 'Có lỗi xảy ra khi cập nhật trạng thái',
-          'Lỗi'
-        );
-      }
-    });
+    let confirmMessage = '';
+    
+    switch (newStatus) {
+      case 'inactive':
+        confirmMessage = 'Tạm khóa tài khoản này? Người dùng sẽ không thể đăng nhập cho đến khi được kích hoạt lại.';
+        break;
+      case 'banned':
+        confirmMessage = 'Cấm tài khoản này? Đây là hành động nghiêm trọng và thường áp dụng cho các vi phạm điều khoản.';
+        break;
+      case 'active':
+        confirmMessage = 'Kích hoạt lại tài khoản này?';
+        break;
+    }
+
+    if (confirm(confirmMessage)) {
+      this.userManagementService.updateUserStatus(userId, newStatus).subscribe({
+        next: (response) => {
+          let successMessage = '';
+          switch (newStatus) {
+            case 'inactive':
+              successMessage = 'Đã tạm khóa tài khoản';
+              break;
+            case 'banned':
+              successMessage = 'Đã cấm tài khoản';
+              break;
+            case 'active':
+              successMessage = 'Đã kích hoạt tài khoản';
+              break;
+          }
+          this.toastrService.success(successMessage, 'Thành công');
+          this.loadUsers();
+        },
+        error: (error) => {
+          this.toastrService.danger(
+            error.message || 'Có lỗi xảy ra khi cập nhật trạng thái',
+            'Lỗi'
+          );
+        }
+      });
+    }
   }
 } 
