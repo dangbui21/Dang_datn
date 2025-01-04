@@ -6,6 +6,7 @@ import { AuthService } from '../../../@core/services/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DashboardHistoryService } from '../dashboard-history/dashboard-history.service';
+import { LanguageService } from '../../../@core/services/language.service';
 
 // Thêm export cho interface
 export interface DashboardItem extends GridsterItem {
@@ -68,6 +69,7 @@ export class CustomChartComponent implements OnInit, OnDestroy {
   userId: number;
   saveToSQL = true; // Toggle giữa lưu SQL và JSON
   private dashboardSubscription: Subscription;
+  currentLanguage: string = 'en';
 
   constructor(
     private elementRef: ElementRef,
@@ -76,6 +78,7 @@ export class CustomChartComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private dashboardHistoryService: DashboardHistoryService,
     private router: Router,
+    private languageService: LanguageService,
   ) {
     this.dashboardSubscription = this.dashboardHistoryService.dashboardUpdate$
       .subscribe(dashboard => {
@@ -83,6 +86,9 @@ export class CustomChartComponent implements OnInit, OnDestroy {
           this.dashboard = dashboard;
         }
       });
+    this.languageService.currentLanguage$.subscribe(language => {
+      this.currentLanguage = language;
+    });
   }
 
   ngOnInit() {
@@ -163,6 +169,7 @@ export class CustomChartComponent implements OnInit, OnDestroy {
       ];
       this.loadDashboard();
     }
+    this.currentLanguage = this.languageService.getCurrentLanguage();
   }
 
   ngOnDestroy() {

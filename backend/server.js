@@ -1,22 +1,22 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const config = require('./src/config/app.config');
 const authRoutes = require('./src/routes/authRoutes');
 const dashboardRoutes = require('./src/routes/dashboardRoutes');
 const adminRoutes = require('./src/routes/adminRoutes'); 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors());
+app.use(cors(config.corsOptions));
 app.use(bodyParser.json());
 
 // Routes
 app.use('/acc', authRoutes);
-app.use('/api', dashboardRoutes);
-app.use('/api/admin', adminRoutes);
+app.use(config.api.prefix, dashboardRoutes);
+app.use(`${config.api.prefix}/admin`, adminRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server đang chạy tại http://localhost:${PORT}`);
+app.listen(config.PORT, () => {
+  console.log(`Server đang chạy tại http://localhost:${config.PORT}`);
 });

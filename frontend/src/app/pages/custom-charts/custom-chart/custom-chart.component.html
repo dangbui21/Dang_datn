@@ -2,33 +2,39 @@
     <div class="chart-controls">
         <button nbButton ghost status="primary" (click)="toggleChartSelector()">
             <nb-icon [icon]="isChartSelectorVisible ? 'minus-outline' : 'plus-outline'"></nb-icon>
-            {{ isChartSelectorVisible ? 'Hide Chart Selector' : 'Add New Chart' }}
+            <span *ngIf="currentLanguage === 'en'">{{ isChartSelectorVisible ? 'Hide Chart Selector' : 'Add New Chart' }}</span>
+            <span *ngIf="currentLanguage === 'vi_VN'">{{ isChartSelectorVisible ? 'Ẩn Bộ Chọn Biểu Đồ' : 'Thêm Biểu Đồ Mới' }}</span>
         </button>
-        <button nbButton ghost status="info" (click)="toggleStorageType()">
+        <!-- <button nbButton ghost status="info" (click)="toggleStorageType()">
             <nb-icon icon="swap-outline"></nb-icon>
-            {{ saveToSQL ? 'Đang lưu MySQL' : 'Đang lưu JSON' }}
-        </button>
+            <span *ngIf="currentLanguage === 'en'">{{ saveToSQL ? 'Saving to MySQL' : 'Saving to JSON' }}</span>
+            <span *ngIf="currentLanguage === 'vi_VN'">{{ saveToSQL ? 'Đang lưu MySQL' : 'Đang lưu JSON' }}</span>
+        </button> -->
         <button nbButton ghost status="success" (click)="saveDashboard()">
             <nb-icon icon="save-outline"></nb-icon>
-            Lưu cấu hình
+            <span *ngIf="currentLanguage === 'en'">Save Configuration</span>
+            <span *ngIf="currentLanguage === 'vi_VN'">Lưu Cấu Hình</span>
         </button>
         <button nbButton ghost status="warning" (click)="viewHistory()">
             <nb-icon icon="clock-outline"></nb-icon>
-            Xem lịch sử
+            <span *ngIf="currentLanguage === 'en'">View History</span>
+            <span *ngIf="currentLanguage === 'vi_VN'">Xem Lịch Sử</span>
         </button>
     </div>
 
     <div class="chart-selector" *ngIf="isChartSelectorVisible">
-        <nb-select [(selected)]="selectedChart" placeholder="Select a chart">
-            <!-- Advanced Charts -->
-            <nb-option-group title="Advanced Charts">
+        <nb-select [(selected)]="selectedChart">
+            <span *ngIf="currentLanguage === 'en'" placeholder="Select a chart"></span>
+            <span *ngIf="currentLanguage === 'vi_VN'" placeholder="Chọn biểu đồ"></span>
+            
+            <!-- Option groups with translations -->
+            <nb-option-group [title]="currentLanguage === 'en' ? 'Advanced Charts' : 'Biểu Đồ Nâng Cao'">
                 <nb-option value="AdvancedChart">Advanced Chart</nb-option>
                 <nb-option value="MiniChart">Mini Chart</nb-option>
                 <nb-option value="SymbolOverview">Symbol Overview</nb-option>
             </nb-option-group>
 
-            <!-- Heatmaps -->
-            <nb-option-group title="Heatmaps">
+            <nb-option-group [title]="currentLanguage === 'en' ? 'Heatmaps' : 'Bản Đồ Nhiệt'">
                 <nb-option value="EtfHeatmap">ETF Heatmap</nb-option>
                 <nb-option value="StockHeatmap">Stock Heatmap</nb-option>
                 <nb-option value="CryptoCoinsHeatmap">Crypto Coins Heatmap</nb-option>
@@ -69,7 +75,10 @@
                 <nb-option value="TickerTape">Ticker Tape</nb-option>
             </nb-option-group>
         </nb-select>
-        <button nbButton status="primary" (click)="addChart()">Add Chart</button>
+        <button nbButton status="primary" (click)="addChart()">
+            <span *ngIf="currentLanguage === 'en'">Add Chart</span>
+            <span *ngIf="currentLanguage === 'vi_VN'">Thêm Biểu Đồ</span>
+        </button>
     </div>
 
     <gridster [options]="options">
