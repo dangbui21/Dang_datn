@@ -64,7 +64,16 @@ export class MenuItems {
       {
         title: currentLang === 'en' ? 'My Page' : 'Trang của tôi',
         icon: 'person-outline',
-        link: '/pages/my-page',
+        children: [
+          {
+            title: currentLang === 'en' ? 'Custom Page' : 'Trang tùy chỉnh',
+            link: '/pages/my-page',
+          },
+          {
+            title: currentLang === 'en' ? 'Stock Info' : 'Thông tin cổ phiếu',
+            link: '/pages/my-page/stock',
+          },
+        ],
       },
       {
         title: currentLang === 'en' ? 'Chart Guide' : 'Hướng dẫn sử dụng biểu đồ',

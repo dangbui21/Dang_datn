@@ -19,7 +19,7 @@ import { ChartGuideComponent } from './chart-guide/chart-guide.component';
 import { PagesComponent } from './pages.component';
 import { TechnicalChartsComponent } from './technical-charts/technical-charts.component';
 import { AuthGuard } from './acc/guards/auth.guard';
-import { StockInfoModule } from './stock-info/stock-info.module';
+
 
 
 @NgModule({
@@ -38,7 +38,7 @@ import { StockInfoModule } from './stock-info/stock-info.module';
     AccModule,
     UserManagementModule,
     MiscellaneousModule,
-    StockInfoModule,
+    
   ],
   declarations: [
     PagesComponent,

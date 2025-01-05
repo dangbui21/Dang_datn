@@ -39,6 +39,22 @@ class WatchlistController {
       }
     }
   }
+
+  static async removeFromWatchlist(req, res) {
+    try {
+      const userId = req.userData.userId;
+      const { symbol } = req.params;
+      console.log('Removing symbol from watchlist:', symbol, 'for userId:', userId);
+
+      const result = await WatchlistModel.removeFromWatchlist(userId, symbol);
+      console.log('Remove from watchlist result:', result);
+      
+      res.json({ message: 'Stock removed from watchlist successfully' });
+    } catch (error) {
+      console.error('Error removing from watchlist:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
 }
 
 module.exports = WatchlistController; 

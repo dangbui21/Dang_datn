@@ -41,4 +41,19 @@ export class WatchlistService {
       })
     );
   }
+
+  removeFromWatchlist(symbol: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    console.log('Token being used for remove:', token);
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    
+    return this.http.delete(`${this.apiUrl}/${symbol}`, { headers }).pipe(
+      tap(response => console.log('Remove from watchlist response:', response)),
+      catchError(error => {
+        console.error('Remove from watchlist error:', error);
+        return throwError(() => error);
+      })
+    );
+  }
 } 

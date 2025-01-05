@@ -163,10 +163,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       next: (result) => {
         console.log('Search result:', result);
         if (result && result.length > 0) {
-          // Lấy symbol từ kết quả tìm kiếm thay vì dùng searchTerm
           const foundSymbol = result[0].symbol;
           console.log('Stock found, navigating to:', foundSymbol);
-          this.router.navigate(['/pages/stock-info', foundSymbol]);
+          this.router.navigate(['/pages/my-page/stock', foundSymbol]);
         } else {
           console.log('No stock found for term:', searchTerm);
           this.toastrService.show('Không tìm thấy mã cổ phiếu', 'Thông báo', { status: 'warning' });

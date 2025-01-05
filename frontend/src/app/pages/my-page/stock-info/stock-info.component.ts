@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { WatchlistService } from '../../@core/services/watchlist.service';
+import { WatchlistService } from '../../../@core/services/watchlist.service';
 import { NbToastrService } from '@nebular/theme';
 
 @Component({
@@ -67,8 +67,22 @@ export class StockInfoComponent implements OnInit, OnDestroy {
       });
   }
 
+  removeFromWatchlist() {
+    this.watchlistService.removeFromWatchlist(this.symbol)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.toastrService.success('Removed from watchlist', 'Success');
+          this.loadWatchlist(); // Reload watchlist
+        },
+        error: (error) => {
+          this.toastrService.danger('Error removing from watchlist', 'Error');
+        }
+      });
+  }
+
   onWatchlistSelect(symbol: string) {
-    this.router.navigate(['/pages/stock-info', symbol]);
+    this.router.navigate(['/pages/my-page/stock', symbol]);
   }
 
   ngOnDestroy() {

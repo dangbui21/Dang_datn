@@ -63,6 +63,42 @@ class WatchlistModel {
       });
     });
   }
+
+  static async removeFromWatchlist(userId, symbol) {
+    return new Promise((resolve, reject) => {
+      // Đầu tiên tìm stock_id từ symbol
+      const findStockSql = 'SELECT id FROM stocks WHERE symbol = ?';
+      console.log('Finding stock:', findStockSql, 'with symbol:', symbol);
+      
+      db.query(findStockSql, [symbol], (err, results) => {
+        if (err) {
+          console.error('Error finding stock:', err);
+          reject(err);
+          return;
+        }
+        
+        if (results.length === 0) {
+          console.log('Stock not found:', symbol);
+          reject(new Error('Stock not found'));
+          return;
+        }
+
+        const stockId = results[0].id;
+        const deleteSql = 'DELETE FROM user_stocks WHERE user_id = ? AND stock_id = ?';
+        console.log('Deleting from watchlist:', deleteSql, 'userId:', userId, 'stockId:', stockId);
+        
+        db.query(deleteSql, [userId, stockId], (err, result) => {
+          if (err) {
+            console.error('Error deleting from watchlist:', err);
+            reject(err);
+            return;
+          }
+          console.log('Successfully removed from watchlist');
+          resolve(result);
+        });
+      });
+    });
+  }
 }
 
 module.exports = WatchlistModel; 

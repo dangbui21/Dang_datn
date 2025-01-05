@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GridsterConfig } from 'angular-gridster2';
-import { CustomChartService } from '../custom-charts/custom-chart.service';
-import { DashboardItem } from '../custom-charts/custom-chart/custom-chart.component';
-import { AuthService } from '../../@core/services/auth.service';
+import { CustomChartService } from '../../custom-charts/custom-chart.service';
+import { DashboardItem } from '../../custom-charts/custom-chart/custom-chart.component';
+import { AuthService } from '../../../@core/services/auth.service';
 import { NbToastrService } from '@nebular/theme';
 
 @Component({

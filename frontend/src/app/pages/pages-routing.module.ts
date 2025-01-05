@@ -8,8 +8,8 @@ import { NotFoundComponent } from './miscellaneous/not-found/not-found.component
 import { TechnicalChartsComponent } from './technical-charts/technical-charts.component';
 import { StockMarketComponent } from './stock-market/stock-market.component';
 import { CustomChartComponent } from './custom-charts/custom-chart/custom-chart.component';
-import { MyPageComponent } from './my-page/my-page.component';
-import { AccComponent } from './acc/acc.component';
+import { MyPageComponent } from './my-page/custom-mypage/my-page.component';
+
 import { AuthGuard } from './acc/guards/auth.guard';
 import { ChartGuideComponent } from './chart-guide/chart-guide.component';
 import { DashboardHistoryComponent } from './custom-charts/dashboard-history/dashboard-history.component';
@@ -43,8 +43,8 @@ const routes: Routes = [{
     },
     {
       path: 'my-page',
-      component: MyPageComponent,  
-      canActivate: [AuthGuard]
+      loadChildren: () => import('./my-page/my-page.module')
+        .then(m => m.MyPageModule),
     },
     {
       path: 'chart-guide',
@@ -59,17 +59,15 @@ const routes: Routes = [{
       loadChildren: () => import('./user-management/user-management.module')
         .then(m => m.UserManagementModule),
     },
-    {
-      path: 'stock-info',
-      loadChildren: () => import('./stock-info/stock-info.module')
-        .then(m => m.StockInfoModule),
-    },
+  
     {
       path: '**',
       component: NotFoundComponent,
     },
   ],
 }];
+
+console.log('Pages routes:', routes);
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
