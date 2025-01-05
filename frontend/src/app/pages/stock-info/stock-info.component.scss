@@ -62,4 +62,15 @@
     font-weight: bold;
     color: nb-theme(color-primary-500);
   }
+
+  .actions {
+    margin-left: auto;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    nb-select {
+      min-width: 200px;
+    }
+  }
 } 

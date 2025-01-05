@@ -6,6 +6,7 @@ const authRoutes = require('./src/routes/authRoutes');
 const dashboardRoutes = require('./src/routes/dashboardRoutes');
 const adminRoutes = require('./src/routes/adminRoutes'); 
 const stockRoutes = require('./src/routes/stockRoutes');
+const watchlistRoutes = require('./src/routes/watchlistRoutes');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use('/acc', authRoutes);
 app.use(config.api.prefix, dashboardRoutes);
 app.use(`${config.api.prefix}/admin`, adminRoutes);
 app.use(`${config.api.prefix}/stocks`, stockRoutes);
+app.use(`${config.api.prefix}/watchlist`, watchlistRoutes);
 
 app.listen(config.PORT, () => {
   console.log(`Server đang chạy tại http://localhost:${config.PORT}`);

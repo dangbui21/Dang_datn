@@ -2,6 +2,17 @@
   <nb-card-header class="stock-header">
     <span class="title">Stock Information:</span>
     <span class="symbol">{{symbol}}</span>
+    <div class="actions">
+      <nb-select placeholder="My Watchlist" (selectedChange)="onWatchlistSelect($event)">
+        <nb-option *ngFor="let stock of watchlist" [value]="stock.symbol">
+          {{stock.symbol}} - {{stock.name}}
+        </nb-option>
+      </nb-select>
+      <button nbButton status="primary" (click)="addToWatchlist()">
+        <nb-icon icon="star"></nb-icon>
+        Add to Watchlist
+      </button>
+    </div>
   </nb-card-header>
   <nb-card-body class="grid-container">
     <div class="chart-container symbol-info">
