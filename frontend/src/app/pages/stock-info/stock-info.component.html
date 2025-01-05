@@ -1,0 +1,23 @@
+<nb-card>
+  <nb-card-header class="stock-header">
+    <span class="title">Stock Information:</span>
+    <span class="symbol">{{symbol}}</span>
+  </nb-card-header>
+  <nb-card-body class="grid-container">
+    <div class="chart-container symbol-info">
+      <tr-symbol-info [symbol]="symbol"></tr-symbol-info>
+    </div>
+    
+    <div class="chart-container technical-analysis">
+      <tr-symbol-technical-analysis [symbol]="symbol"></tr-symbol-technical-analysis>
+    </div>
+    
+    <div class="chart-container financials">
+      <tr-symbol-financials-data [symbol]="symbol"></tr-symbol-financials-data>
+    </div>
+    
+    <div class="chart-container profile">
+      <tr-symbol-profile [symbol]="symbol"></tr-symbol-profile>
+    </div>
+  </nb-card-body>
+</nb-card> 

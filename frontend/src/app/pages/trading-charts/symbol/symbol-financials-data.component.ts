@@ -3,15 +3,15 @@ import { SymbolBaseComponent } from './symbol-base.component';
 
 @Component({
   selector: 'tr-symbol-financials-data',
-  template: `
-    <div class="symbol-selector">
+  template: ` <div class="tradingview-widget-container"></div>
+    <!-- <div class="symbol-selector">
       <label for="symbol">Select Symbol:</label>
       <select id="symbol" [(ngModel)]="selectedSymbol" (change)="onSymbolChange($event)">
         
         <option *ngFor="let sym of getSymbols()" [value]="sym">{{ sym }}</option>
       </select>
     </div>
-    <div class="tradingview-widget-container"></div>
+    <div class="tradingview-widget-container"></div> -->
   `,
   styles: [
     `

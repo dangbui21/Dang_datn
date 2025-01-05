@@ -12,6 +12,7 @@ export class StockSearchService {
   constructor(private http: HttpClient) { }
 
   searchStocks(symbol: string): Observable<any> {
+    console.log('Calling API:', `${this.apiUrl}/search?symbol=${symbol}`);
     return this.http.get(`${this.apiUrl}/search?symbol=${symbol}`);
   }
 } 

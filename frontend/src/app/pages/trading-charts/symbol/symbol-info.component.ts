@@ -5,9 +5,14 @@ import { SymbolBaseComponent } from './symbol-base.component';
 @Component({
   selector: 'tr-symbol-info',
   template: `
-    <div class="tradingview-widget-container"></div>
+    <div class="tradingview-widget-container" style="height: 100%"></div>
   `,
-  
+  styles: [`
+    :host {
+      display: block;
+      height: 100%;
+    }
+  `]
 })
 export class SymbolInfoComponent extends SymbolBaseComponent implements OnInit {
   
@@ -29,6 +34,7 @@ export class SymbolInfoComponent extends SymbolBaseComponent implements OnInit {
       script.innerHTML = JSON.stringify({
        "symbol": symbol,
        "width": "100%",
+       "height": "100%",
        "isTransparent": false,
        "colorTheme": (theme === 'dark' || theme === 'cosmic') ? 'dark' : 'light',
        "locale": language,

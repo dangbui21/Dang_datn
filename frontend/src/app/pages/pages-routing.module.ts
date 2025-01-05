@@ -60,6 +60,11 @@ const routes: Routes = [{
         .then(m => m.UserManagementModule),
     },
     {
+      path: 'stock-info',
+      loadChildren: () => import('./stock-info/stock-info.module')
+        .then(m => m.StockInfoModule),
+    },
+    {
       path: '**',
       component: NotFoundComponent,
     },

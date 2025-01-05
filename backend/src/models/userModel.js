@@ -46,8 +46,8 @@ class UserModel {
 
   static async getAllUsers() {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT id, username, email, status, role, created_at FROM users';
-      db.query(sql, (err, results) => {
+      const sql = 'SELECT id, username, email, status, role, created_at FROM users WHERE role != ?';
+      db.query(sql, ['admin'], (err, results) => {
         if (err) reject(err);
         resolve(results);
       });
@@ -59,10 +59,11 @@ class UserModel {
       const sql = `
         SELECT id, username, email, status, role, created_at 
         FROM users 
-        WHERE username LIKE ? OR email LIKE ?
+        WHERE (username LIKE ? OR email LIKE ?)
+        AND role != ?
       `;
       const searchPattern = `%${searchTerm}%`;
-      db.query(sql, [searchPattern, searchPattern], (err, results) => {
+      db.query(sql, [searchPattern, searchPattern, 'admin'], (err, results) => {
         if (err) reject(err);
         resolve(results);
       });

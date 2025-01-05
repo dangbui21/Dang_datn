@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { LanguageService } from '../../@core/services/language.service';
 
 @Component({
   template: '' 
 })
-export abstract class TradingViewBaseComponent implements OnInit, AfterViewInit, OnDestroy {
+export abstract class TradingViewBaseComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   currentTheme: string; //chủ đề 
   currentLanguage: string; //ngôn ngữ
   
@@ -43,6 +43,15 @@ export abstract class TradingViewBaseComponent implements OnInit, AfterViewInit,
 
   ngOnDestroy(): void {
     this.resetContainer();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['symbol'] && !changes['symbol'].firstChange) {
+      console.log('Symbol changed to:', changes['symbol'].currentValue);
+      this.resetContainer();
+      this.scriptLoaded = false;
+      this.loadScript(this.currentTheme, this.currentLanguage, changes['symbol'].currentValue);
+    }
   }
 
   protected resetContainer(): void {

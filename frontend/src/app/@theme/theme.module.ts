@@ -72,7 +72,7 @@ const PIPES = [
 
 @NgModule({
   imports: [CommonModule, ...NB_MODULES],
-  exports: [CommonModule, ...PIPES, ...COMPONENTS],
+  exports: [CommonModule, ...PIPES, ...COMPONENTS, NbSearchModule],
   declarations: [...COMPONENTS, ...PIPES],
 })
 export class ThemeModule {

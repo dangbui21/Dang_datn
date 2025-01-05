@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
+import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService, NbToastrService, NbSearchService } from '@nebular/theme';
 import { Router } from '@angular/router';
 
 import { UserData } from '../../../@core/data/users';
@@ -8,6 +8,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { LanguageService } from '../../../@core/services/language.service';
 import { AuthService } from '../../../@core/services/auth.service';
+import { StockSearchService } from '../../../@core/services/stock-search.service';
 
 
 @Component({
@@ -57,8 +58,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private breakpointService: NbMediaBreakpointsService,
     private languageService: LanguageService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private stockSearchService: StockSearchService,
+    private toastrService: NbToastrService,
+    private searchService: NbSearchService
   ) {
+    console.log('HeaderComponent initialized');
     console.log('User menu:', this.userMenu);
     // Đăng ký subscription để theo dõi ngôn ngữ hiện tại
     this.languageService.currentLanguage$.subscribe(language => {
@@ -66,6 +71,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
       this.loadContentForCurrentLanguage();
     });
+
+    // Subscribe to search events
+    this.searchService.onSearchSubmit()
+      .subscribe((data: any) => {
+        console.log('Search submitted:', data);
+        this.onSearch(data.term);
+      });
   }
   
 
@@ -131,7 +143,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout() {
     // localStorage.removeItem('user'); // Xóa thông tin người dùng
-    // console.log('Đăng xuất thành công'); // In ra log khi đăng xuất thành c��ng
+    // console.log('Đăng xuất thành công'); // In ra log khi đăng xuất thành công
     
     // // Cập nhật lại menu
     // this.menuService.navigateHome();
@@ -142,6 +154,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.logout(); // Sử dụng service để đăng xuất
     console.log('Đăng xuất thành công');
     this.router.navigate(['/pages/acc/login']); // Chuyển hướng về trang đăng nhập
+  }
+
+  onSearch(searchTerm: string) {
+    console.log('Search triggered with term:', searchTerm);
+    
+    this.stockSearchService.searchStocks(searchTerm).subscribe({
+      next: (result) => {
+        console.log('Search result:', result);
+        if (result && result.length > 0) {
+          // Lấy symbol từ kết quả tìm kiếm thay vì dùng searchTerm
+          const foundSymbol = result[0].symbol;
+          console.log('Stock found, navigating to:', foundSymbol);
+          this.router.navigate(['/pages/stock-info', foundSymbol]);
+        } else {
+          console.log('No stock found for term:', searchTerm);
+          this.toastrService.show('Không tìm thấy mã cổ phiếu', 'Thông báo', { status: 'warning' });
+        }
+      },
+      error: (error) => {
+        console.error('Search API error:', error);
+        this.toastrService.show('Có lỗi xảy ra khi tìm kiếm', 'Lỗi', { status: 'danger' });
+      }
+    });
   }
 
 }

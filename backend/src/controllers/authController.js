@@ -1,5 +1,6 @@
 const UserModel = require('../models/userModel');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 class AuthController {
   static async register(req, res) {
@@ -25,23 +26,15 @@ class AuthController {
   }
 
   static async login(req, res) {
-    const { email, password } = req.body;
     try {
+      const { email, password } = req.body;
       const user = await UserModel.findByEmail(email);
       
       // Kiểm tra user tồn tại
       if (!user) {
-        return res.status(401).json({ 
+        return res.status(401).json({
           success: false,
-          message: 'Email hoặc mật khẩu không chính xác' 
-        });
-      }
-
-      // Chỉ kiểm tra trạng thái banned
-      if (user.status === 'banned') {
-        return res.status(403).json({ 
-          success: false,
-          message: 'Tài khoản của bạn đã bị cấm. Vui lòng liên hệ quản trị viên để biết thêm chi tiết.' 
+          message: 'Email hoặc mật khẩu không chính xác'
         });
       }
 
@@ -54,11 +47,24 @@ class AuthController {
         });
       }
 
-      // Thêm cảnh báo nếu tài khoản inactive
-      const warningMessage = user.status === 'inactive' 
-        ? 'Tài khoản của bạn đang ở trạng thái không hoạt động. Một số tính năng có thể bị hạn chế.'
-        : null;
+      // Kiểm tra trạng thái tài khoản
+      if (user.status === 'inactive') {
+        return res.status(403).json({
+          success: false,
+          message: 'Tài khoản tạm thời bị vô hiệu hóa. Vui lòng liên hệ admin để được hỗ trợ.',
+          status: 'inactive'
+        });
+      }
 
+      if (user.status === 'banned') {
+        return res.status(403).json({
+          success: false,
+          message: 'Tài khoản đã bị cấm vĩnh viễn do vi phạm điều khoản sử dụng.',
+          status: 'banned'
+        });
+      }
+
+      // Chỉ tạo response cho tài khoản active
       const userResponse = {
         id: user.id,
         email: user.email,
@@ -67,11 +73,18 @@ class AuthController {
         status: user.status
       };
 
+      // Generate JWT token here
+      const token = jwt.sign(
+        { userId: user.id, role: user.role },
+        'your_jwt_secret',
+        { expiresIn: '24h' }
+      );
+
       res.status(200).json({ 
         success: true,
         message: 'Đăng nhập thành công',
-        warning: warningMessage,
-        user: userResponse 
+        user: userResponse,
+        token: token
       });
     } catch (error) {
       console.error('Lỗi đăng nhập:', error);
