@@ -16,6 +16,7 @@ Backend sẽ chạy tại `http://localhost:3000`
 Di chuyển vào thư mục backend
 
 cd backend
+
 Cài đặt các dependencies
 
 npm install
