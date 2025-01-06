@@ -13,23 +13,31 @@ Dự án này là một ứng dụng web cho phép người dùng tùy chỉnh v
 ### 1. Cài đặt Backend
 Backend sẽ chạy tại `http://localhost:3000`
 
-bash
 Di chuyển vào thư mục backend
+
 cd backend
 Cài đặt các dependencies
+
 npm install
+
 Khởi động server trong chế độ development
+
 npm run dev
 
 
 ### 2. Cài đặt Frontend 
 Frontend sẽ chạy tại `http://localhost:4200`
-bash
+
 Di chuyển vào thư mục frontend
+
 cd frontend
+
 Cài đặt các dependencies
+
 npm install
+
 Khởi động ứng dụng Angular
+
 ng serve
 
 
