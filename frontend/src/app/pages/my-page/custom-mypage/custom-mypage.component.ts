@@ -7,8 +7,8 @@ import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-my-page',
-  templateUrl: './my-page.component.html',
-  styleUrls: ['./my-page.component.scss']
+  templateUrl: './custom-mypage.component.html',
+  styleUrls: ['./custom-mypage.component.scss']
 })
 export class MyPageComponent implements OnInit {
   // Cấu hình cho gridster

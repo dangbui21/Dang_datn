@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MyPageComponent } from './custom-mypage/my-page.component';
+import { MyPageComponent } from './custom-mypage/custom-mypage.component';
 import { StockInfoComponent } from './stock-info/stock-info.component';
 
 const routes: Routes = [

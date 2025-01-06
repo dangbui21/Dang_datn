@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MyPageComponent } from './custom-mypage/my-page.component';
+import { MyPageComponent } from './custom-mypage/custom-mypage.component';
 import { StockInfoComponent } from './stock-info/stock-info.component';
 import { NbCardModule, NbButtonModule, NbIconModule, NbSelectModule } from '@nebular/theme';
 import { GridsterModule } from 'angular-gridster2';
