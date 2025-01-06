@@ -7,23 +7,23 @@ MySQL (version 5.7 hoặc cao hơn khuyến nghị 8.0)
 Cài đặt và Chạy ứng dụng
 1. Cài đặt Backend
 Backend sẽ chạy tại http://localhost:3000
-# Di chuyển vào thư mục backend
+Di chuyển vào thư mục backend
 cd backend
 
-# Cài đặt các dependencies
+Cài đặt các dependencies
 npm install
 
-# Khởi động server trong chế độ development
+Khởi động server trong chế độ development
 npm run dev
 3. Cài đặt Frontend
 Frontend sẽ chạy tại http://localhost:4200
-# Di chuyển vào thư mục frontend
+Di chuyển vào thư mục frontend
 cd frontend
 
-# Cài đặt các dependencies
+Cài đặt các dependencies
 npm install
 
-# Khởi động ứng dụng Angular
+Khởi động ứng dụng Angular
 ng serve
 Cấu hình Database
 Đảm bảo MySQL đã được cài đặt và đang chạy
