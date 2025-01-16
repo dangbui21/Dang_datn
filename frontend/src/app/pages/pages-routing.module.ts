@@ -18,6 +18,13 @@ const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+
+    {
+      path: '',
+      redirectTo: 'stock-market',
+      pathMatch: 'full', // Thêm route mặc định trỏ đến stock-market
+    },
+    
     {
       path: 'stock-market',
       component: StockMarketComponent,
