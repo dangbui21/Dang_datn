@@ -20,7 +20,6 @@
 
 // install the framework and custom global styles
 @include nb-install() {
-
   // framework global styles
   @include nb-theme-global();
   @include nb-auth-global();
@@ -38,8 +37,33 @@ html, body {
 
 body { 
   margin: 0; 
-  font-family: Roboto, 
-  'Helvetica Neue', 
-  sans-serif; 
+  font-family: Roboto, 'Helvetica Neue', sans-serif; 
 }
 
+// Sửa các lỗi linting
+// 1. Thêm newline sau { và ; trong block multi-line
+// 2. Thêm newline trước } trong block multi-line
+
+// Sửa lại các quy định trong SCSS như sau
+
+// Mỗi block multi-line có một dòng mới sau { và ;:
+@import 'themes'; 
+
+// Quy tắc newline sau mở và đóng dấu ngoặc
+@import '@nebular/theme/styles/globals';
+
+// Đảm bảo rằng các dòng CSS có thụt lề đúng
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/grid';
+
+// Các khai báo nên được viết đúng cách
+@include nb-install() {
+  @include nb-theme-global();
+  @include nb-auth-global();
+
+  @include ngx-layout();
+  @include ngx-pace-theme();
+  @include nb-overrides();
+}
