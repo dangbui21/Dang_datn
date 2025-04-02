@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { WatchlistService } from '../../../@core/services/watchlist.service';
 import { NbToastrService } from '@nebular/theme';
 
+
 @Component({
   selector: 'ngx-stock-info',
   templateUrl: './stock-info.component.html',
@@ -14,7 +15,7 @@ export class StockInfoComponent implements OnInit, OnDestroy {
   symbol: string;
   watchlist: any[] = [];
   private destroy$ = new Subject<void>();
-
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -89,4 +90,7 @@ export class StockInfoComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  
+  
 } 
