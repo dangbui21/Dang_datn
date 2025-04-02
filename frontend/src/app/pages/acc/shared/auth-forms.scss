@@ -33,7 +33,7 @@
     align-items: center;
     
     &::before {
-      content: "!";
+      content: '!';
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -74,7 +74,7 @@
     background-color: nb-theme(background-basic-color-1);
   }
 
-  button[type="submit"] {
+  button[type='submit'] {
     margin-top: 1.5rem;
     height: 3rem;
     font-weight: 600;
@@ -105,3 +105,4 @@
     }
   }
 } 
+
