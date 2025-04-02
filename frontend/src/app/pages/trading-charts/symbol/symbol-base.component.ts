@@ -5,7 +5,7 @@ import { NbThemeService } from '@nebular/theme';
 import { LanguageService } from '../../../@core/services/language.service';
 
 @Component({
-  selector: '',
+  selector: 'ngx-symbol-base',
   template: ` `,
 })
 export class SymbolBaseComponent extends TradingViewBaseComponent implements OnInit {
