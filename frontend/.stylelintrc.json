@@ -27,9 +27,6 @@
     "declaration-block-trailing-semicolon": "always",
     "declaration-block-single-line-max-declarations": 1,
     "declaration-block-semicolon-space-before": "never",
-    "declaration-block-semicolon-space-after": "always-single-line",
-    "declaration-block-semicolon-newline-before": "never-multi-line",
-    "declaration-block-semicolon-newline-after": "always-multi-line",
     "declaration-property-value-blacklist": [
       { "/.*/": ["initial"] },
       { "message": "The `initial` value is not supported in IE."}
