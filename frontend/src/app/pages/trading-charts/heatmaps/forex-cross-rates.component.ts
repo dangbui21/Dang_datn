@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TradingViewBaseComponent } from '../trading-base.component';
 
 @Component({
-  selector: 'tr-forex-cross-rates',
+  selector: 'ngx-tr-forex-cross-rates',
   template: `
     <div class="tradingview-widget-container"></div>
   `,

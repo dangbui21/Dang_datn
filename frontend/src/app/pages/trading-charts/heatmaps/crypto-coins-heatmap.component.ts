@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TradingViewBaseComponent } from '../trading-base.component';
 
 @Component({
-  selector: 'tr-crypto-coins-heatmap',
+  selector: 'ngx-tr-crypto-coins-heatmap',
   template: `
     <div class="tradingview-widget-container"></div>
   `,

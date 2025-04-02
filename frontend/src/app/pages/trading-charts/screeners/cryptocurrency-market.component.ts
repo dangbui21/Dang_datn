@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TradingViewBaseComponent } from '../trading-base.component';
 
 @Component({
-  selector: 'tr-cryptocurrency-market',
+  selector: 'ngx-tr-cryptocurrency-market',
   template: `
     <div class="tradingview-widget-container"></div>
   `,

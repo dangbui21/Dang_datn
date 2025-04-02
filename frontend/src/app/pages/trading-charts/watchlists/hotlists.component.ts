@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TradingViewBaseComponent } from '../trading-base.component';
 
 @Component({
-  selector: 'tr-hotlist',
+  selector: 'ngx-tr-hotlist',
   template: `
     <div class="form-group">
     <label for="exchangeSelect" class="text-label">Chọn sàn giao dịch:</label>

@@ -1,10 +1,10 @@
 <div class="page-header">
-  <h1 class="h1">
-    <nb-icon icon="trending-up-outline" class="h4"></nb-icon>
-    <span *ngIf="currentLanguage === 'en'">Stock Market</span>
-    <span *ngIf="currentLanguage === 'vi_VN'">Thị Trường Chứng Khoán</span>
-  </h1>
- 
+    <h1 class="h1">
+        <nb-icon icon="trending-up-outline" class="h4"></nb-icon>
+        <span *ngIf="currentLanguage === 'en'">Stock Market</span>
+        <span *ngIf="currentLanguage === 'vi_VN'">Thị Trường Chứng Khoán</span>
+    </h1>
+
 </div>
 
 <div class="container-fluid">
@@ -13,8 +13,8 @@
         <div class="col-12">
             <nb-card>
                 <nb-card-body class="p-0">
-                
-                    <tr-ticker-tape></tr-ticker-tape>
+
+                    <ngx-tr-ticker-tape></ngx-tr-ticker-tape>
                 </nb-card-body>
             </nb-card>
         </div>
@@ -33,14 +33,15 @@
                                 <span *ngIf="currentLanguage === 'vi_VN'">Bản Đồ Nhiệt Thị Trường</span>
                             </h5>
                             <span class="subtitle-2 text-hint d-block mt-1">
-                                <span *ngIf="currentLanguage === 'en'">Visual representation of market performance</span>
+                                <span *ngIf="currentLanguage === 'en'">Visual representation of market
+                                    performance</span>
                                 <span *ngIf="currentLanguage === 'vi_VN'">Biểu đồ nhiệt hiệu suất thị trường</span>
                             </span>
                         </div>
                     </div>
                 </nb-card-header>
                 <nb-card-body>
-                    <tr-stock-heatmap></tr-stock-heatmap>
+                    <ngx-tr-stock-heatmap></ngx-tr-stock-heatmap>
                 </nb-card-body>
             </nb-card>
         </div>
@@ -62,7 +63,7 @@
                     </span>
                 </nb-card-header>
                 <nb-card-body>
-                    <tr-market-overview></tr-market-overview>
+                    <ngx-tr-market-overview></ngx-tr-market-overview>
                 </nb-card-body>
             </nb-card>
         </div>
@@ -80,7 +81,7 @@
                     </span>
                 </nb-card-header>
                 <nb-card-body>
-                    <tr-market-quotes></tr-market-quotes>
+                    <ngx-tr-market-quotes></ngx-tr-market-quotes>
                 </nb-card-body>
             </nb-card>
         </div>
@@ -99,14 +100,16 @@
                                 <span *ngIf="currentLanguage === 'vi_VN'">Bộ Lọc Thị Trường</span>
                             </h5>
                             <span class="subtitle-2 text-hint d-block mt-1">
-                                <span *ngIf="currentLanguage === 'en'">AdEvanced stock screening and filtering tools</span>
-                                <span *ngIf="currentLanguage === 'vi_VN'">Công cụ lọc và sàng lọc cổ phiếu nâng cao</span>
+                                <span *ngIf="currentLanguage === 'en'">AdEvanced stock screening and filtering
+                                    tools</span>
+                                <span *ngIf="currentLanguage === 'vi_VN'">Công cụ lọc và sàng lọc cổ phiếu nâng
+                                    cao</span>
                             </span>
                         </div>
                     </div>
                 </nb-card-header>
                 <nb-card-body>
-                    <tr-screener></tr-screener>
+                    <ngx-tr-screener></ngx-tr-screener>
                 </nb-card-body>
             </nb-card>
         </div>

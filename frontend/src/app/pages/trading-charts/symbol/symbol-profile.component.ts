@@ -3,7 +3,7 @@ import { TradingViewBaseComponent } from '../trading-base.component';
 import { SymbolBaseComponent } from './symbol-base.component';
 
 @Component({
-  selector: 'tr-symbol-profile',
+  selector: 'ngx-tr-symbol-profile',
   template: `
     <div class="tradingview-widget-container"></div>
   `,

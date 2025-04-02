@@ -3,7 +3,7 @@ import { Component} from '@angular/core';
 import { TradingViewBaseComponent } from '../trading-base.component';
 
 @Component({
-  selector: 'tr-symbol-overview',
+  selector: 'ngx-tr-symbol-overview',
   template: `
     <div class="tradingview-widget-container"></div>
      

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TradingViewBaseComponent } from '../trading-base.component';
 
 @Component({
-  selector: 'tr-advanced-chart',
+  selector: 'ngx-tr-advanced-chart',
   template: `
     <div class="tradingview-widget-container"></div>
   `,

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TradingViewBaseComponent } from '../trading-base.component';
 
 @Component({
-  selector: 'tr-forex-heatmap',
+  selector: 'ngx-tr-forex-heatmap',
   template: `
     <div class="tradingview-widget-container"></div>
   `,

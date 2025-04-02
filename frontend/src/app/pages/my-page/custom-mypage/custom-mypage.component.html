@@ -14,41 +14,43 @@
                     <nb-card-body>
                         <ng-container [ngSwitch]="item.type">
                             <!-- Advanced Charts -->
-                            <tr-advanced-chart *ngSwitchCase="'AdvancedChart'"></tr-advanced-chart>
-                            <tr-mini-chart *ngSwitchCase="'MiniChart'"></tr-mini-chart>
-                            <tr-symbol-overview *ngSwitchCase="'SymbolOverview'"></tr-symbol-overview>
+                            <ngx-tr-advanced-chart *ngSwitchCase="'AdvancedChart'"></ngx-tr-advanced-chart>
+                            <ngx-tr-mini-chart *ngSwitchCase="'MiniChart'"></ngx-tr-mini-chart>
+                            <ngx-tr-symbol-overview *ngSwitchCase="'SymbolOverview'"></ngx-tr-symbol-overview>
 
                             <!-- Heatmaps -->
-                            <tr-etf-heatmap *ngSwitchCase="'EtfHeatmap'"></tr-etf-heatmap>
-                            <tr-stock-heatmap *ngSwitchCase="'StockHeatmap'"></tr-stock-heatmap>
-                            <tr-crypto-coins-heatmap *ngSwitchCase="'CryptoCoinsHeatmap'"></tr-crypto-coins-heatmap>
-                            <tr-forex-cross-rates *ngSwitchCase="'ForexCrossRates'"></tr-forex-cross-rates>
-                            <tr-forex-heatmap *ngSwitchCase="'ForexHeatmap'"></tr-forex-heatmap>
+                            <ngx-tr-etf-heatmap *ngSwitchCase="'EtfHeatmap'"></ngx-tr-etf-heatmap>
+                            <ngx-tr-stock-heatmap *ngSwitchCase="'StockHeatmap'"></ngx-tr-stock-heatmap>
+                            <ngx-tr-crypto-coins-heatmap
+                                *ngSwitchCase="'CryptoCoinsHeatmap'"></ngx-tr-crypto-coins-heatmap>
+                            <ngx-tr-forex-cross-rates *ngSwitchCase="'ForexCrossRates'"></ngx-tr-forex-cross-rates>
+                            <ngx-tr-forex-heatmap *ngSwitchCase="'ForexHeatmap'"></ngx-tr-forex-heatmap>
 
                             <!-- Market Data -->
-                            <tr-hotlist *ngSwitchCase="'HotList'"></tr-hotlist>
-                            <tr-market-overview *ngSwitchCase="'MarketOverview'"></tr-market-overview>
-                            <tr-market-quotes *ngSwitchCase="'MarketQuotes'"></tr-market-quotes>
+                            <ngx-tr-hotlist *ngSwitchCase="'HotList'"></ngx-tr-hotlist>
+                            <ngx-tr-market-overview *ngSwitchCase="'MarketOverview'"></ngx-tr-market-overview>
+                            <ngx-tr-market-quotes *ngSwitchCase="'MarketQuotes'"></ngx-tr-market-quotes>
 
                             <!-- News -->
-                            <tr-news *ngSwitchCase="'News'"></tr-news>
+                            <ngx-tr-news *ngSwitchCase="'News'"></ngx-tr-news>
 
                             <!-- Screener -->
-                            <tr-cryptocurrency-market *ngSwitchCase="'CryptocurrencyMarket'"></tr-cryptocurrency-market>
-                            <tr-screener *ngSwitchCase="'Screener'"></tr-screener>
+                            <ngx-tr-cryptocurrency-market
+                                *ngSwitchCase="'CryptocurrencyMarket'"></ngx-tr-cryptocurrency-market>
+                            <ngx-tr-screener *ngSwitchCase="'Screener'"></ngx-tr-screener>
 
                             <!-- Symbol Info -->
-                            <tr-symbol-financials-data
-                                *ngSwitchCase="'SymbolFinancialsData'"></tr-symbol-financials-data>
-                            <tr-symbol-info *ngSwitchCase="'SymbolInfo'"></tr-symbol-info>
-                            <tr-symbol-profile *ngSwitchCase="'SymbolProfile'"></tr-symbol-profile>
-                            <tr-symbol-technical-analysis
-                                *ngSwitchCase="'SymbolTechnicalAnalysis'"></tr-symbol-technical-analysis>
+                            <ngx-tr-symbol-financials-data
+                                *ngSwitchCase="'SymbolFinancialsData'"></ngx-tr-symbol-financials-data>
+                            <ngx-tr-symbol-info *ngSwitchCase="'SymbolInfo'"></ngx-tr-symbol-info>
+                            <ngx-tr-symbol-profile *ngSwitchCase="'SymbolProfile'"></ngx-tr-symbol-profile>
+                            <ngx-tr-symbol-technical-analysis
+                                *ngSwitchCase="'SymbolTechnicalAnalysis'"></ngx-tr-symbol-technical-analysis>
 
                             <!-- Tickers -->
-                            <tr-single-ticker *ngSwitchCase="'SingleTicker'"></tr-single-ticker>
-                            <tr-ticker *ngSwitchCase="'Ticker'"></tr-ticker>
-                            <tr-ticker-tape *ngSwitchCase="'TickerTape'"></tr-ticker-tape>
+                            <ngx-tr-single-ticker *ngSwitchCase="'SingleTicker'"></ngx-tr-single-ticker>
+                            <ngx-tr-ticker *ngSwitchCase="'Ticker'"></ngx-tr-ticker>
+                            <ngx-tr-ticker-tape *ngSwitchCase="'TickerTape'"></ngx-tr-ticker-tape>
                         </ng-container>
                     </nb-card-body>
                 </nb-card>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SymbolBaseComponent } from './symbol-base.component';
 
 @Component({
-  selector: 'tr-symbol-financials-data',
+  selector: 'ngx-tr-symbol-financials-data',
   template: ` <div class="tradingview-widget-container"></div>
     <!-- <div class="symbol-selector">
       <label for="symbol">Select Symbol:</label>

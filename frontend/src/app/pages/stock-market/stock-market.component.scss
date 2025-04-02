@@ -10,31 +10,31 @@
 // Áp dụng chiều cao cho từng loại biểu đồ
 .container-fluid {
   // Ticker tape
-  tr-ticker-tape {
+  ngx-tr-ticker-tape {
     display: block;
     height: var(--ticker-height);
   }
 
   // Heatmap
-  tr-stock-heatmap {
+  ngx-tr-stock-heatmap {
     display: block;
     height: var(--heatmap-height);
   }
 
   // Hotlist
-  tr-hotlists {
+  ngx-tr-hotlists {
     display: block;
     height: var(--hotlist-height);
   }
 
   // Market Overview
-  tr-market-overview {
+  ngx-tr-market-overview {
     display: block;
     height: var(--market-overview-height);
   }
 
   // Screener
-  tr-screener {
+  ngx-tr-screener {
     display: block;
     height: var(--screener-height);
   }

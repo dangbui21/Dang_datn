@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TradingViewBaseComponent } from '../trading-base.component';
 
 @Component({
-  selector: 'tr-news',
+  selector: 'ngx-tr-news',
   template: `
     <div class="tradingview-widget-container"></div>
   `,
