@@ -19,7 +19,7 @@
 
     "unit-case": "lower",
     "unit-no-unknown": true,
-    "unit-whitelist": ["px", "%", "deg", "ms", "em", "vh", "vw", "s", "rem"],
+    "unit-whitelist": ["px", "%", "deg", "ms", "em", "vh", "vw", "s", "rem", "fr"],
 
     "value-list-comma-space-after": "always-single-line",
     "value-list-comma-space-before": "never",
@@ -48,9 +48,9 @@
         "ignoreAtRules": ["if", "else"]
       }
     ],
-    "block-closing-brace-newline-before": "always-multi-line",
-    "block-opening-brace-newline-after": "always-multi-line",
-    "block-opening-brace-space-before": "always-multi-line",
+    "block-closing-brace-newline-before": "null",
+    "block-opening-brace-newline-after": "null",
+    "block-opening-brace-space-before": "null",
 
     "selector-attribute-brackets-space-inside": "never",
     "selector-attribute-operator-space-after": "never",
