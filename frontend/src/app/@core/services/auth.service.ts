@@ -8,8 +8,7 @@ interface User {
   username: string;
   // thêm các trường khác nếu cần
 }
-
-@Injectable({
+@Injectable({         
   providedIn: 'root'
 })
 export class AuthService {

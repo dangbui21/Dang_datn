@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MyPageComponent } from './custom-mypage/custom-mypage.component';
 import { StockInfoComponent } from './stock-info/stock-info.component';
+import { AuthGuard } from '../acc/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -9,15 +10,18 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: MyPageComponent
+        component: MyPageComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'stock',
-        component: StockInfoComponent
+        component: StockInfoComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'stock/:symbol',
-        component: StockInfoComponent
+        component: StockInfoComponent,
+        canActivate: [AuthGuard],
       }
     ]
   }

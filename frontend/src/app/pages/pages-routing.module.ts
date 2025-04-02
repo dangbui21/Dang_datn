@@ -8,7 +8,7 @@ import { NotFoundComponent } from './miscellaneous/not-found/not-found.component
 import { TechnicalChartsComponent } from './technical-charts/technical-charts.component';
 import { StockMarketComponent } from './stock-market/stock-market.component';
 import { CustomChartComponent } from './custom-charts/custom-chart/custom-chart.component';
-import { MyPageComponent } from './my-page/custom-mypage/custom-mypage.component';
+
 
 import { AuthGuard } from './acc/guards/auth.guard';
 import { ChartGuideComponent } from './chart-guide/chart-guide.component';
