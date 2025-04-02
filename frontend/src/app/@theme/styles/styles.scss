@@ -41,18 +41,14 @@ body {
 }
 
 // Sửa các lỗi linting
+
 // 1. Thêm newline sau { và ; trong block multi-line
-// 2. Thêm newline trước } trong block multi-line
-
-// Sửa lại các quy định trong SCSS như sau
-
-// Mỗi block multi-line có một dòng mới sau { và ;:
 @import 'themes'; 
 
 // Quy tắc newline sau mở và đóng dấu ngoặc
 @import '@nebular/theme/styles/globals';
 
-// Đảm bảo rằng các dòng CSS có thụt lề đúng
+// Thêm newline sau { và trước }
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
 @import 'bootstrap/scss/mixins';
